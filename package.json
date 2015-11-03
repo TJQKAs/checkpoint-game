@@ -1,0 +1,31 @@
+{
+  "name": "checkpoint_game",
+  "version": "1.0.0",
+  "description": "Geolocation game where a host creates a new game by setting a number of checkpoints. Players are then invited to participate in a race to get to each checkpoint and 'check-in'. Winner being the first to check-in to all checkpoints.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Benaud12/checkpoint_game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Benaud12/checkpoint_game/issues"
+  },
+  "homepage": "https://github.com/Benaud12/checkpoint_game#readme",
+  "devDependencies": {
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "phantomjs": "^1.9.18",
+    "protractor": "^2.5.1"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
