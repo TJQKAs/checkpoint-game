@@ -5,6 +5,7 @@
     <title>Checkpoint Game</title>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.js"></script>
     <script src="bower_components/rsvp/rsvp.min.js"></script>
@@ -13,7 +14,12 @@
   </head>
 
   <body>
-    <div>
+    <div ng-controller="GameController as gameCtrl">
+      <ul class="list-group">
+        <li ng-repeat="checkpoint in gameCtrl.checkpoints">
+          <button class="checkpoint">{{checkpoint.id}}</button>
+        </li>
+      </ul>
     </div>
   </body>
 </html>
