@@ -31,7 +31,11 @@ describe('GameController', function() {
   }));
 
   it('initializes with the saved checkpoints', function(){
-    expect(ctrl.checkpoints.name).toEqual("Buckingham Palace");
+    var data;
+    ctrl.checkpoints.once('value', function(snapshot){
+      data = snapshot.val();
+    });
+    expect(data.name).toEqual("Buckingham Palace");
   });
 
 });
