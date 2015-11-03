@@ -11,13 +11,17 @@
     <script src="bower_components/rsvp/rsvp.min.js"></script>
     <script src="bower_components/geofire/dist/geofire.js"></script>
     <script src="app/js/app.js"></script>
+    <script src="app/js/databaseDataFactory.js"></script>
+    <script src="app/js/gameController.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
   </head>
 
   <body>
     <div ng-controller="GameController as gameCtrl">
       <ul class="list-group">
         <li ng-repeat="checkpoint in gameCtrl.checkpoints">
-          <button class="checkpoint">{{checkpoint.id}}</button>
+          <button class="checkpoint">{{gameCtrl.checkpoint.id}}</button>
         </li>
       </ul>
     </div>

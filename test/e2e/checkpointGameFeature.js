@@ -13,7 +13,7 @@ describe('Checkpoint Game', function() {
     it('checkpoint is red and unable to check-in', function(){
       var checkpoint = element(by.css('.checkpoint'));
       var checkinButton = element(by.css('#check-in'));
-      expect(checkpoint.getCssValue('color')).toEqual('red');
+      expect(checkpoint.getCssValue('background-color')).toEqual('rgba(255, 0, 0, 1)');
       checkinButton.click();
       expect(checkpoint.getText()).toEqual('Unable to check-in, too far from next checkpoint');
     });
