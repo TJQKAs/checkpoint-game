@@ -1,25 +1,12 @@
-checkpointApp.controller("LocationController", function($scope, $firebaseObject, DatabaseDataFactory)) {
+checkpointApp.controller("LocationController", function($scope, $firebaseObject, DatabaseDataFactory) {
 
   var self = this;
   // var ref = new Firebase("https://resplendent-torch-5391.firebaseio.com/");
-  var ref = databaseService;
+  var ref = DatabaseDataFactory;
   var syncObject = $firebaseObject(ref);
   syncObject.$bindTo($scope, 'data')
 
-  self.authData = ref.getAuth();
-
   var geoFire = new GeoFire(ref);
-  geoFire.set({
-    "Checkpoint1": [51.515082, -0.072987],
-  }).then(function(){
-    var checky = ref.child("Checkpoint1")
-    checky.update({
-      name: "Aldgate"
-    });
-  });
-
-
-  if (self.authData) {
 
     var getLocation = function() {
       if (typeof navigator !== "undefined" && typeof navigator.geolocation !== "undefined") {
@@ -58,7 +45,6 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
       }
     };
 
-  };
 
   this.getDistance = function(){
     var userLocation = [self.latitude, self.longitude];
