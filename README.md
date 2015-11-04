@@ -5,3 +5,6 @@ Geolocation game where a host creates a new game by setting a number of checkpoi
 Potential additional features:
   - Team play
   - Tasks / challenges at each checkpoint
+
+  
+See extensive documentation on the wiki here: https://github.com/Benaud12/checkpoint_game/wiki
