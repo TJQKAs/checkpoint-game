@@ -7,13 +7,15 @@ ref.set({
       name: "Checkpoint One",
       realName: "Makers Academy",
       position: { latitude: 51.517399, longitude: -0.07346970000000001 },
-      located: false
+      located: false,
+      color: '#FF0000'
       },
   1: {
       id: 1,
       name: "Checkpoint Two",
       realName: "Aldgate East",
       position: { latitude: 51.5152, longitude: -0.0722 },
-      located: false
+      located: false,
+      color: '#FF0000'
     }
 });

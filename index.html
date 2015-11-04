@@ -24,7 +24,7 @@
       <div>
         <ul class="list-group">
           <li ng-repeat="checkpoint in gameCtrl.checkpoints">
-            <button class="checkpoint" id="checkpoint-{{checkpoint.id}}">{{checkpoint.name}}</button>
+            <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}}">{{checkpoint.name}}</button>
           </li>
         </ul>
       </div>

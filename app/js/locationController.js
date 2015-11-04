@@ -44,11 +44,9 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
     var checkpointId = checkpoint.id
     var checkpointData = ref.child('checkpoints').child(checkpointId)
     if (distanceToTarget < 0.02) {
-      console.log("this worked")
-      console.log(checkpointId)
-      $('#checkpoint-'+checkpointId).css({'background-color': '#60EC18'})
       checkpointData.update({
-        located: true
+        located: true,
+        color: '#60EC18'
       })
     };
   };
