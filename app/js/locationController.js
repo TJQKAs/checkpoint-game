@@ -19,16 +19,6 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
     var geolocationCallback = function(location) {
       self.latitude = location.coords.latitude;
       self.longitude = location.coords.longitude;
-      var userTable = ref.child("users")
-      userTable.update({
-        userId: self.authData.uid,
-        currentLocation: [self.latitude, self.longitude]
-      })
-      geoFire.set(self.authData.uid, [self.latitude, self.longitude]).then(function() {
-        ref.child(self.authData.uid).onDisconnect().remove();
-      }).catch(function(error) {
-        alert("Error adding user's location to GeoFire");
-      });
     };
 
     getLocation();
@@ -46,10 +36,10 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
     };
 
 
-  this.getDistance = function(){
-    var userLocation = [self.latitude, self.longitude];
-    var targetLocation = [parseFloat(self.targetLat), parseFloat(self.targetLon)];
-    self.distanceToTarget = GeoFire.distance(userLocation, targetLocation);
-  };
+  // this.getDistance = function(){
+  //   var userLocation = [self.latitude, self.longitude];
+  //   var targetLocation = [parseFloat(self.targetLat), parseFloat(self.targetLon)];
+  //   self.distanceToTarget = GeoFire.distance(userLocation, targetLocation);
+  // };
 
 });
