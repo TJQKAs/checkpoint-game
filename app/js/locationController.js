@@ -38,6 +38,7 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   };
 
   this.checkIn = function(checkpoint) {
+    getLocation();
     var userLocation = [self.latitude, self.longitude];
     var targetLocation = [checkpoint.position.latitude, checkpoint.position.longitude];
     var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
