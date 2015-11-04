@@ -13,6 +13,9 @@
     <script src="app/js/app.js"></script>
     <script src="app/js/databaseDataFactory.js"></script>
     <script src="app/js/gameController.js"></script>
+    <script src="app/js/location.js"></script>
+    <script src="app/js/locationController.js"></script>
+
     <link rel="stylesheet" type="text/css" href="styles.css">
 
   </head>
@@ -21,9 +24,18 @@
     <div ng-controller="GameController as gameCtrl">
       <ul class="list-group">
         <li ng-repeat="checkpoint in gameCtrl.checkpoints">
-          <button class="checkpoint">{{gameCtrl.checkpoint.id}}</button>
+          <button class="checkpoint">{{checkpoint.name}}</button>
         </li>
       </ul>
     </div>
+
+    <div ng-controller="LocationController as locationCtrl">
+      <div>
+        Current location:<br>
+        Latitude {{locationCtrl.latitude}}<br>
+        Longitude {{locationCtrl.longitude}}
+      </div>
+    </div>
+
   </body>
 </html>
