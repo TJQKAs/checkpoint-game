@@ -37,22 +37,19 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
     }
   };
 
-
-  // this.getDistance = function(checkpoint){
-  //   var userLocation = [self.latitude, self.longitude];
-  //   var targetLocation = [checkpoint.position.latitude, checkpoint.position.longitude];
-  //   self.distanceToTarget = GeoFire.distance(userLocation, targetLocation);
-  // };
-
   this.checkIn = function(checkpoint) {
     var userLocation = [self.latitude, self.longitude];
     var targetLocation = [checkpoint.position.latitude, checkpoint.position.longitude];
     var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
-    var checkpointId = "checkpoint-" + checkpoint.id
+    var checkpointId = checkpoint.id
+    var checkpointData = ref.child('checkpoints').child(checkpointId)
     if (distanceToTarget < 0.02) {
       console.log("this worked")
       console.log(checkpointId)
-      $('#checkpoint-0').css({'background-color': 'green'})
+      $('#checkpoint-'+checkpointId).css({'background-color': '#60EC18'})
+      checkpointData.update({
+        located: true
+      })
     };
   };
 

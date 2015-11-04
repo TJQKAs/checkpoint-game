@@ -10,8 +10,4 @@ checkpointApp.controller('GameController', function(DatabaseDataFactory){
 
   self.nextCheckpoint = self.checkpoints[0]
 
-  console.log(self.checkpoints[0])
-
-  // self.checkpoints = sync.checkpoints;
-
 });
