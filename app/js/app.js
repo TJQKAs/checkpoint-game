@@ -5,7 +5,9 @@ ref.set({
 
    0 :
     {
+    id: 0,
     name: "Checkpoint One",
-    position: { lattitude: 51.5010, longitude: -0.1416 }
+    position: { latitude: 51.517399, longitude: -0.07346970000000001 }
+    // position: { latitude: 51.5010, longitude: -0.1416 }
     }
 });

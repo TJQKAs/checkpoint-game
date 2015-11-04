@@ -8,6 +8,10 @@ checkpointApp.controller('GameController', function(DatabaseDataFactory){
     self.checkpoints = snapshot.val();
   });
 
+  self.nextCheckpoint = self.checkpoints[0]
+
+  console.log(self.checkpoints[0])
+
   // self.checkpoints = sync.checkpoints;
 
 });

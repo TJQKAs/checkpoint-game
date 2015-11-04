@@ -21,20 +21,25 @@
 
   <body>
     <div ng-controller="GameController as gameCtrl">
-      <ul class="list-group">
-        <li ng-repeat="checkpoint in gameCtrl.checkpoints">
-          <button class="checkpoint">{{checkpoint.name}}</button>
-        </li>
-      </ul>
-    </div>
-
-    <div ng-controller="LocationController as locationCtrl">
       <div>
-        Current location:<br>
-        Latitude {{locationCtrl.latitude}}<br>
-        Longitude {{locationCtrl.longitude}}
+        <ul class="list-group">
+          <li ng-repeat="checkpoint in gameCtrl.checkpoints">
+            <button class="checkpoint" id="checkpoint-"+"{{checkpoint.id}}">{{checkpoint.name}}</button>
+          </li>
+        </ul>
+      </div>
+
+      <div ng-controller="LocationController as locationCtrl">
+        <div>
+          Current location:<br>
+          Latitude {{locationCtrl.latitude}}<br>
+          Longitude {{locationCtrl.longitude}}
+        </div>
+        <button id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextCheckpoint)">Check In</button>
       </div>
     </div>
+
+
 
   </body>
 </html>

@@ -38,10 +38,22 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   };
 
 
-  // this.getDistance = function(){
+  // this.getDistance = function(checkpoint){
   //   var userLocation = [self.latitude, self.longitude];
-  //   var targetLocation = [parseFloat(self.targetLat), parseFloat(self.targetLon)];
+  //   var targetLocation = [checkpoint.position.latitude, checkpoint.position.longitude];
   //   self.distanceToTarget = GeoFire.distance(userLocation, targetLocation);
   // };
+
+  this.checkIn = function(checkpoint) {
+    var userLocation = [self.latitude, self.longitude];
+    var targetLocation = [checkpoint.position.latitude, checkpoint.position.longitude];
+    var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
+    var checkpointId = "checkpoint-" + checkpoint.id
+    if (distanceToTarget < 0.02) {
+      console.log("this worked")
+      console.log(checkpointId)
+      $('#checkpoint-0').css({'background-color': 'green'})
+    };
+  };
 
 });
