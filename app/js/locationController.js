@@ -4,7 +4,7 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   // var ref = new Firebase("https://resplendent-torch-5391.firebaseio.com/");
   var ref = DatabaseDataFactory;
   var syncObject = $firebaseObject(ref);
-  syncObject.$bindTo($scope, 'data')
+  syncObject.$bindTo($scope, 'data');
 
   var geoFire = new GeoFire(ref.child('current_locations'));
 
@@ -19,11 +19,11 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   var geolocationCallback = function(location) {
     self.latitude = location.coords.latitude;
     self.longitude = location.coords.longitude;
-    geoFire.set("Michael", [self.latitude, self.longitude])
-    console.log(self.longitude)
+    geoFire.set("Michael", [self.latitude, self.longitude]);
+    // console.log(self.longitude)
   };
 
-  getLocation();
+  // getLocation();
 
   var errorHandler = function(error) {
     if (error.code == 1) {
@@ -42,37 +42,38 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
     var userLocation = [self.latitude, self.longitude];
     var targetLocation = [checkpoint.position.latitude, checkpoint.position.longitude];
     var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
-    var checkpointId = checkpoint.id
-    var checkpointData = ref.child('checkpoints').child(checkpointId)
+    var checkpointId = checkpoint.id;
+    var checkpointData = ref.child('checkpoints').child(checkpointId);
     if (distanceToTarget < 0.02) {
       checkpointData.update({
-      located: true,
+      located: true
       })
     };
     checkpointData.update( changeColour(distanceToTarget) );
   };
 
   var changeColour = function(distanceToTarget) {
+    // console.log("Distance to target..." + distanceToTarget);
     if (distanceToTarget > 5) {
       return ({color: '#0022FF'})
     }
-     else if ( distanceToTarget > 3 ) {
-      return ({color: '#00FFFF'})
+    else if ( distanceToTarget > 3 ) {
+      return ({color: '#00FFF2'})
     }
     else if ( distanceToTarget > 1 ) {
-     return ({color: '#00FFFF'})
-   }
-   else if ( distanceToTarget > 0.5 ) {
-    return ({color: '#00FFFF'})
-  }
-  else if ( distanceToTarget > 0.2 ) {
-   return ({color: '#00FFFF'})
- }
- else if ( distanceToTarget > 0.1 ) {
-  return ({color: '#00FFFF'})
-}
-
-
+      return ({color: '#00FF26'})
+    }
+    else if ( distanceToTarget > 0.5 ) {
+      return ({color: '#7BFF00'})
+    }
+    else if ( distanceToTarget > 0.2 ) {
+      return ({color: '#FFD900'})
+    }
+    else if ( distanceToTarget > 0.1 ) {
+      return ({color: '#FF5900'})
+    }
+    else {
+      return ({color: '#FF0000'})
     }
   };
 
