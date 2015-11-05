@@ -27,6 +27,9 @@
     <div id="signed-in" ng-show="userCtrl.authData">
       <div ng-controller="GameController as gameCtrl">
         <div>
+          <button>Start Game</button>
+        </div>
+        <div>
           <ul class="list-group">
             <li ng-repeat="checkpoint in gameCtrl.checkpoints">
               <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}}">{{checkpoint.name}}</button>
