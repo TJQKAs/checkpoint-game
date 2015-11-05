@@ -22,7 +22,7 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
         console.log("Successfully created user account with uid:", userData.uid);
         self.email = self.newEmail;
         self.password = self.newPassword;
-        link = 'users/' + userData.uid
+        var link = 'users/' + userData.uid
         ref.child(link).set({name: self.name})
         console.log("Hopefully user was added to our database");
         self.userLogin();
