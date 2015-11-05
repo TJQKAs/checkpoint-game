@@ -11,20 +11,31 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
     console.log("User is logged out");
   }
 
+  validateUserInput = function(){
+    var password = self.newPassword;
+    if (password.length < 8) {throw alert("Password must be over 8 characters in length")};
+    if (password !== self.confirmPassword) {throw alert("Password does not match confirmation password")};
+    for (var key in self.allPlayers) {
+      var val = self.allPlayers[key];
+      if (val.name === self.username) {
+        throw alert("Username has already been taken");
+      };
+    };
+  };
+
   self.userSignup = function() {
+    validateUserInput();
     ref.createUser({
       email    : self.newEmail,
       password : self.newPassword
     }, function(error, userData) {
       if (error) {
-        console.log("Error creating user:", error);
+        alert(error)
       } else {
-        console.log("Successfully created user account with uid:", userData.uid);
         self.email = self.newEmail;
         self.password = self.newPassword;
         var link = 'users/' + userData.uid
-        ref.child(link).set({name: self.name})
-        console.log("Hopefully user was added to our database");
+        ref.child(link).set({name: self.username})
         self.userLogin();
       }
     });
