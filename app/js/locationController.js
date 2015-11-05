@@ -6,7 +6,7 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   var syncObject = $firebaseObject(ref);
   syncObject.$bindTo($scope, 'data');
 
-  var geoFire = new GeoFire(ref.child('current_locations'));
+  var geoFire = new GeoFire(ref);
 
   var getLocation = function() {
     if (typeof navigator !== "undefined" && typeof navigator.geolocation !== "undefined") {
@@ -19,11 +19,11 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   var geolocationCallback = function(location) {
     self.latitude = location.coords.latitude;
     self.longitude = location.coords.longitude;
-    geoFire.set("Michael", [self.latitude, self.longitude]);
+    // geoFire.set("Michael", [self.latitude, self.longitude]);
     // console.log(self.longitude)
   };
 
-  // getLocation();
+  getLocation();
 
   var errorHandler = function(error) {
     if (error.code == 1) {
@@ -39,6 +39,7 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
 
   this.checkIn = function(checkpoint) {
     getLocation();
+    console.log(checkpoint)
     var userLocation = [self.latitude, self.longitude];
     var targetLocation = [checkpoint.position.latitude, checkpoint.position.longitude];
     var distanceToTarget = GeoFire.distance(userLocation, targetLocation);

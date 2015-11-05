@@ -27,7 +27,7 @@
     <div id="signed-in" ng-show="userCtrl.authData">
       <div ng-controller="GameController as gameCtrl">
         <div>
-          <button>Start Game</button>
+          <button ng-click="gameCtrl.startGame()">Start Game</button>
         </div>
         <div>
           <ul class="list-group">
