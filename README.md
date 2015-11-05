@@ -6,5 +6,17 @@ Potential additional features:
   - Team play
   - Tasks / challenges at each checkpoint
 
-  
+## Documentation
+
 See extensive documentation on the wiki here: https://github.com/Benaud12/checkpoint_game/wiki
+
+## Getting started with a local demo
+
+```
+git clone https://github.com/Benaud12/checkpoint_game
+cd checkpoint_game
+bower install
+npm install
+open -a "Google Chrome" --args --allow-file-access-from-files
+open index.html
+```
