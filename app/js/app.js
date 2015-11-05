@@ -8,7 +8,9 @@ ref.set({
       realName: "Makers Academy",
       position: { latitude: 51.517399, longitude: -0.07346970000000001 },
       located: false,
-      color: '#0022FF'
+      color: '#FF0000',
+      mapPositionTop: 21,
+      mapPositionLeft: 17
       },
   b: {
       id: 'b',
@@ -16,6 +18,8 @@ ref.set({
       realName: "Aldgate East",
       position: { latitude: 51.5152, longitude: -0.0722 },
       located: false,
-      color: '#0022FF'
+      color: '#FF0000',
+      mapPositionTop: 70,
+      mapPositionLeft: 33
     }
 });
