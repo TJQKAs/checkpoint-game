@@ -44,8 +44,14 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
     });
   };
 
+
   self.userLogout = function() {
     ref.unauth();
     document.location.reload();
   };
+
+  ref.child('users').once('value', function(snapshot) {
+    self.allPlayers = snapshot.val();
+  });
+
 });

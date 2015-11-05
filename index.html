@@ -62,7 +62,14 @@
             </div>
           </div>
             <div id = "players" ng-show = "tabCtrl.isSelected('players')">
-              PLAYERS
+              <ul>
+                <div ng-repeat ="player in userCtrl.allPlayers">
+                  <li>
+                    {{player.name}}
+                  </li>
+                  <br>
+                </div>
+              </ul>
             </div>
             <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
               RULES
