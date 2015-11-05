@@ -65,7 +65,7 @@
               <ul>
                 <div ng-repeat ="player in userCtrl.allPlayers">
                   <li>
-                    {{player.name}}
+                    {{player.name}}<span ng-repeat="checkpoint in player.checkpoints"><button style="background-color:{{checkpoint.color}};">{{checkpoint.id}}</button></span>
                   </li>
                   <br>
                 </div>
