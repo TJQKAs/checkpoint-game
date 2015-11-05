@@ -23,10 +23,11 @@
 
   <body ng-controller="UserController as userCtrl">
 
-    <h3>Checkpoint Game<h3>
 
     <div id="signed-in" ng-show="userCtrl.authData">
       <div id="tabs" ng-controller="tabCtrl as tabCtrl">
+        <h3 id="title">Checkpoint Game<h3>
+
         <ul>
           <li ng-class = "{active:tabCtrl.isSelected('map')}">
             <a href ng-click = "tabCtrl.selectTab('map')">Map</a>
@@ -36,6 +37,9 @@
           </li>
           <li ng-class = "{active:tabCtrl.isSelected('rules')}">
             <a href ng-click = "tabCtrl.selectTab('rules')">Rules</a>
+          </li>
+          <li>
+            <a href ng-click="userCtrl.userLogout()">Sign out</a>
           </li>
         </ul>
 
@@ -69,7 +73,7 @@
       </div>
     </div>
 
-        <button ng-click="userCtrl.userLogout()">Sign out</button>
+        <!-- <button ng-click="userCtrl.userLogout()">Sign out</button> -->
       </div>
 
     <div id="signed-out" ng-hide="userCtrl.authData">

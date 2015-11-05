@@ -1,16 +1,20 @@
-button.checkpoint {
-  background-color: red;
-  border-color: red;
-}
+
 
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
-#wrapper {
+
+/*#wrapper {
   width: 100%;
+}*/
+
+#title {
+  background-color: #D1E0E0;
+  text-align: center;
 }
+
 #tabs {
   width: 60%;
   margin: auto;
@@ -31,7 +35,7 @@ button.checkpoint {
 .active {
   background-color: #94B8B8;
 }
-button {
+button.checkpoint {
   height: 30px;
   width: 30px;
   border-radius : 100%;
