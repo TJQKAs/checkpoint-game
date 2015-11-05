@@ -26,24 +26,25 @@
 
     <div id="signed-in" ng-show="userCtrl.authData">
       <div ng-controller="GameController as gameCtrl">
-        <div>
+        <div ng-hide="gameCtrl.nextUserCheckpoint">
           <button ng-click="gameCtrl.startGame()">Start Game</button>
         </div>
-        <div>
+        <div ng-show="gameCtrl.nextUserCheckpoint">
           <ul class="list-group">
-            <li ng-repeat="checkpoint in gameCtrl.checkpoints">
+            <li ng-repeat="checkpoint in gameCtrl.userCheckpoints">
               <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}}">{{checkpoint.name}}</button>
             </li>
           </ul>
-        </div>
 
-        <div ng-controller="LocationController as locationCtrl">
-          <div>
-            Current location:<br>
-            Latitude {{locationCtrl.latitude}}<br>
-            Longitude {{locationCtrl.longitude}}
+
+          <div ng-controller="LocationController as locationCtrl">
+            <div>
+              Current location:<br>
+              Latitude {{locationCtrl.latitude}}<br>
+              Longitude {{locationCtrl.longitude}}
+            </div>
+            <button id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
           </div>
-          <button id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextCheckpoint)">Check In</button>
         </div>
       </div>
       <button ng-click="userCtrl.userLogout()">Sign out</button>
