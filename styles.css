@@ -50,17 +50,8 @@ button.checkpoint {
   background-repeat: no-repeat;
   background-size: contain;
 }
-#loc1 {
-  position: absolute;
-  top: 21%;
-  left: 17%;
-}
-#loc2 {
-  position: absolute;
-  top: 70%;
-  left: 33%;
-}
-#loc3 {
+
+/*#loc3 {
   position: absolute;
   top: 27%;
   left: 46%;
@@ -74,4 +65,4 @@ button.checkpoint {
   position: absolute;
   top: 39%;
   left: 85%;
-}
+}*/

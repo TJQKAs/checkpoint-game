@@ -22,12 +22,9 @@
   </head>
 
   <body ng-controller="UserController as userCtrl">
-
-
     <div id="signed-in" ng-show="userCtrl.authData">
       <div id="tabs" ng-controller="tabCtrl as tabCtrl">
         <h3 id="title">Checkpoint Game<h3>
-
         <ul>
           <li ng-class = "{active:tabCtrl.isSelected('map')}">
             <a href ng-click = "tabCtrl.selectTab('map')">Map</a>
@@ -36,45 +33,40 @@
             <a href ng-click = "tabCtrl.selectTab('players')">Players</a>
           </li>
           <li ng-class = "{active:tabCtrl.isSelected('rules')}">
-            <a href ng-click = "tabCtrl.selectTab('rules')">Rules</a>
           </li>
           <li>
             <a href ng-click="userCtrl.userLogout()">Sign out</a>
           </li>
         </ul>
-
-      <div>
-        <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
-          <div ng-controller="GameController as gameCtrl">
-            <div>
-              <ul class="list-group">
-                <li ng-repeat="checkpoint in gameCtrl.checkpoints">
-                  <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}}">{{checkpoint.name}}</button>
-                </li>
-              </ul>
+        <div>
+          <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
+            <div ng-controller="GameController as gameCtrl">
+              <div>
+                <ul class="list-group">
+                  <li ng-repeat="checkpoint in gameCtrl.checkpoints">
+                    <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{mapPositionLeft}}%;position:absolute;">{{checkpoint.name}}</button>
+                  </li>
+                </ul>
+              </div>
+            <div ng-controller="LocationController as locationCtrl">
+              <div>
+                Current location:<br>
+                Latitude {{locationCtrl.latitude}}<br>
+                Longitude {{locationCtrl.longitude}}
+              </div>
+              <button id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextCheckpoint)">Check In</button>
             </div>
-          <div ng-controller="LocationController as locationCtrl">
-            <div>
-              Current location:<br>
-              Latitude {{locationCtrl.latitude}}<br>
-              Longitude {{locationCtrl.longitude}}
             </div>
-            <button id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextCheckpoint)">Check In</button>
           </div>
-
-          </div>
+            <div id = "players" ng-show = "tabCtrl.isSelected('players')">
+              PLAYERS
+            </div>
+            <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
+              RULES
+            </div>
         </div>
-          <div id = "players" ng-show = "tabCtrl.isSelected('players')">
-            PLAYERS
-          </div>
-          <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
-            RULES
-          </div>
       </div>
     </div>
-
-        <!-- <button ng-click="userCtrl.userLogout()">Sign out</button> -->
-      </div>
 
     <div id="signed-out" ng-hide="userCtrl.authData">
       <div>
@@ -89,8 +81,5 @@
         <button ng-click="userCtrl.userLogin()">Sign in</button>
       </div>
     </div>
-
-
-
   </body>
 </html>
