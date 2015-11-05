@@ -4,8 +4,7 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   // var ref = new Firebase("https://resplendent-torch-5391.firebaseio.com/");
   var ref = DatabaseDataFactory;
   var syncObject = $firebaseObject(ref);
-  syncObject.$bindTo($scope, 'data')
-
+  syncObject.$bindTo($scope, 'data');
   var geoFire = new GeoFire(ref.child('current_locations'));
 
   var getLocation = function() {
@@ -19,11 +18,11 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   var geolocationCallback = function(location) {
     self.latitude = location.coords.latitude;
     self.longitude = location.coords.longitude;
-    geoFire.set("Michael", [self.latitude, self.longitude])
-    console.log(self.longitude)
+    geoFire.set("Michael", [self.latitude, self.longitude]);
+    // console.log(self.longitude)
   };
 
-  getLocation();
+  // getLocation();
 
   var errorHandler = function(error) {
     if (error.code == 1) {
@@ -42,8 +41,8 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
     var userLocation = [self.latitude, self.longitude];
     var targetLocation = [checkpoint.position.latitude, checkpoint.position.longitude];
     var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
-    var checkpointId = checkpoint.id
-    var checkpointData = ref.child('checkpoints').child(checkpointId)
+    var checkpointId = checkpoint.id;
+    var checkpointData = ref.child('checkpoints').child(checkpointId);
     if (distanceToTarget < 0.02) {
       checkpointData.update({
       located: true
@@ -53,7 +52,7 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
   };
 
   var changeColour = function(distanceToTarget) {
-    console.log(distanceToTarget)
+    // console.log("Distance to target..." + distanceToTarget);
     if (distanceToTarget > 5) {
       return ({color: '#FF0000'})
     }
