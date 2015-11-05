@@ -36,6 +36,7 @@
   background-color: #94B8B8;
 }
 button.checkpoint {
+  font-size:110%;
   height: 30px;
   width: 30px;
   border-radius : 100%;
