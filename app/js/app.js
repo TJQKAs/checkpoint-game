@@ -1,6 +1,6 @@
 var checkpointApp = angular.module("CheckpointApp", ["firebase"]);
 
-var ref = new Firebase("https://checkpoint-game.firebaseio.com/checkpoints");
+var ref = new Firebase("https://checkpoint-game.firebaseio.com/games/game1/checkpoints");
 ref.set({
   a: {
       id: 'a',

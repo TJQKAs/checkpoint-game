@@ -20,7 +20,7 @@ checkpointApp.controller('GameController', function(DatabaseDataFactory){
 
     ref.on('value', function(dataSnapshot){
 
-      ref.child('checkpoints').once('value', function(snapshot) {
+      ref.child('games/game1/checkpoints').once('value', function(snapshot) {
         self.checkpoints = snapshot.val();
       })
 
