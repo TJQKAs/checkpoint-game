@@ -48,6 +48,7 @@
 
     <div id="signed-out" ng-hide="userCtrl.authData">
       <div>
+        <input type="text" ng-model="userCtrl.name" placeholder="name"/>
         <input type="text" ng-model="userCtrl.newEmail" placeholder="email"/>
         <input type="password" ng-model="userCtrl.newPassword" placeholder="password"/>
         <button ng-click="userCtrl.userSignup()">Sign up</button>
