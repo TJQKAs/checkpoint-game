@@ -80,15 +80,20 @@
 
     <div id="signed-out" ng-hide="userCtrl.authData">
       <div>
-        <input type="text" ng-model="userCtrl.name" placeholder="name"/>
-        <input type="text" ng-model="userCtrl.newEmail" placeholder="email"/>
-        <input type="password" ng-model="userCtrl.newPassword" placeholder="password"/>
-        <button ng-click="userCtrl.userSignup()">Sign up</button>
+        <form>
+          <input type="text" ng-model="userCtrl.username" placeholder="username" required/>
+          <input type="text" ng-model="userCtrl.newEmail" placeholder="email" required/>
+          <input type="password" ng-model="userCtrl.newPassword" placeholder="password" required/>
+          <input type="password" ng-model="userCtrl.confirmPassword" placeholder="confirm password" required/>
+          <button ng-click="userCtrl.userSignup()">Sign up</button>
+        </form>
       </div>
       <div>
-        <input type="text" ng-model="userCtrl.email" placeholder="email"/>
-        <input type="password" ng-model="userCtrl.password" placeholder="password"/>
-        <button ng-click="userCtrl.userLogin()">Sign in</button>
+        <form>
+          <input type="text" ng-model="userCtrl.email" placeholder="email"/>
+          <input type="password" ng-model="userCtrl.password" placeholder="password"/>
+          <button ng-click="userCtrl.userLogin()">Sign in</button>
+        </form>
       </div>
     </div>
   </body>
