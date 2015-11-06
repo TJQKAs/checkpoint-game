@@ -63,19 +63,19 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
     var changeColour = function(distanceToTarget) {
     // console.log("Distance to target..." + distanceToTarget);
       if (distanceToTarget > 5) {
-        return ({color: '#B1E8FA'})
+        return ({color: '#9BB9E8'})
       }
       else if ( distanceToTarget > 3 ) {
-        return ({color: '#44AFF2'})
+        return ({color: '#447BF2'})
       }
       else if ( distanceToTarget > 1 ) {
-        return ({color: '#4E66ED'})
+        return ({color: '#A68AED'})
       }
       else if ( distanceToTarget > 0.5 ) {
-        return ({color: '#7632E3'})
+        return ({color: '#F0B6D8'})
       }
       else if ( distanceToTarget > 0.2 ) {
-        return ({color: '#993BB3'})
+        return ({color: '#F257A5'})
       }
       else if ( distanceToTarget > 0.1 ) {
         return ({color: '#F50733'})
