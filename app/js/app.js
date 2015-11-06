@@ -45,8 +45,8 @@ ref.set({
     e: {
       id: 'e',
       name: "Checkpoint Five",
-      realName: "The White Hart",
-      position: { latitude: 51.520052, longitude: -0.056208 },
+      realName: "The Ten Bells",
+      position: { latitude: 51.519318, longitude: -0.074318 },
       located: false,
       color: '#FFFFFF',
       mapPositionTop: 85,
