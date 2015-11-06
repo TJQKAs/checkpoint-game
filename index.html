@@ -46,11 +46,21 @@
                 <button ng-click="gameCtrl.startGame()">Start New Game</button>
               </div>
               <div ng-show="gameCtrl.userCheckpoints">
-                <ul class="list-group">
-                  <li ng-repeat="checkpoint in gameCtrl.userCheckpoints">
+                  <span ng-repeat="checkpoint in gameCtrl.userCheckpoints">
                     <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">{{$index + 1}}</button>
-                  </li>
-                </ul>
+                  </span>
+
+                  <div>
+                    Clue: {{gameCtrl.nextUserCheckpoint.clue}}
+                  </div>
+
+                <div ng-controller="LocationController as locationCtrl">
+                  <div>
+                    Current location:<br>
+                    Latitude {{locationCtrl.latitude}}<br>
+                    Longitude {{locationCtrl.longitude}}
+                  </div>
+                  <button ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
               <div id = 'legend'>
                 <div style = 'background-color: #FFFFFF'>Unlocked</div>
                 <div style = 'background-color: #26C2ED'>FEEEZING</div>
@@ -61,14 +71,6 @@
                 <div style = 'background-color: #F50733'>HOT</div>
                 <div style = 'background-color: #26ED33'>YOU ARE THERE!</div>
               </div>
-                <div ng-controller="LocationController as locationCtrl">
-                  <div>
-                    Current location:<br>
-                    Latitude {{locationCtrl.latitude}}<br>
-                    Longitude {{locationCtrl.longitude}}
-                  </div>
-                  <button ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
-
                   <div ng-show="!gameCtrl.nextUserCheckpoint && gameCtrl.userCheckpoints">
                     Congratulations! You've found all the checkpoints!
                   </div>
