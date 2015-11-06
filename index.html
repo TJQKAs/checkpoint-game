@@ -14,8 +14,8 @@
     <script src="bower_components/geofire/dist/geofire.js"></script>
     <script src="app/js/app.js"></script>
     <script src="app/js/databaseDataFactory.js"></script>
+    <script src="app/js/userLocationFactory.js"></script>
     <script src="app/js/gameController.js"></script>
-    <script src="app/js/locationController.js"></script>
     <script src="app/js/userController.js"></script>
     <script src="app/js/tabController.js"></script>
 
@@ -43,7 +43,7 @@
           <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
             <div ng-controller="GameController as gameCtrl">
 
-              <div ng-hide="gameCtrl.nextUserCheckpoint">
+              <div ng-hide="gameCtrl.nextCheckpoint">
                 <button ng-click="gameCtrl.startGame()">Start New Game</button>
               </div>
 
@@ -53,16 +53,16 @@
                     <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">{{$index + 1}}</button>
                   </li>
                 </ul>
-              <div ng-controller="LocationController as locationCtrl">
+              <div>
                 <div>
                   Current location:<br>
                   Latitude {{locationCtrl.latitude}}<br>
                   Longitude {{locationCtrl.longitude}}
                 </div>
 
-                <button ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
+                <button ng-hide="gameCtrl.runningCheckIn" id="check-in" ng-click="gameCtrl.checkIn()">Check In</button>
 
-                <div ng-show="!gameCtrl.nextUserCheckpoint && gameCtrl.userCheckpoints">
+                <div ng-hide="gameCtrl.nextCheckpoint && gameCtrl.userCheckpoints">
                 Congratulations! You've found all the checkpoints!
                 </div>
 
