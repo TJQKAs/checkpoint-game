@@ -9,6 +9,11 @@
   text-align: center;
 }
 
+#hello {
+  background-color: #D1E0E0;
+  text-align: center;
+}
+
 #tabs {
   width: 60%;
   margin: auto;

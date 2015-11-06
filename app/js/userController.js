@@ -5,6 +5,14 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
 
   self.authData = ref.getAuth();
 
+  if (self.authData){
+    var link = 'users/' + self.authData.uid + '/name'
+    ref.child(link).once('value', function(snapshot) {
+        self.username = snapshot.val();
+        console.log(self.username)
+      });
+  }
+
   validateUserInput = function(){
     var password = self.newPassword;
     if (password.length < 8) {throw alert("Password must be over 8 characters in length")};
@@ -35,6 +43,7 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
     });
   };
 
+
   self.userLogin = function() {
     ref.authWithPassword({
       email    : self.email,
@@ -54,5 +63,7 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
     ref.unauth();
     document.location.reload();
   };
+
+
 
 });
