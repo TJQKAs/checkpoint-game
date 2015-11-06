@@ -20,6 +20,7 @@ checkpointApp.controller('GameController', function($scope, $firebaseObject, Dat
     self.checkIn = function() {
       self.runningCheckIn = true;
       console.log("check in running? ", self.runningCheckIn)
+
       UserLocationFactory(function(returnVal){
         var userLocation = returnVal;
 
