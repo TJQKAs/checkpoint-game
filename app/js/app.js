@@ -5,7 +5,7 @@ ref.set({
   a: {
       id: 'a',
       name: "Checkpoint One",
-      realName: "Makers Academy",
+      realName: "Makers Academy One",
       position: { latitude: 51.517399, longitude: -0.07346970000000001 },
       located: false,
       color: '#FFFFFF',
@@ -21,7 +21,7 @@ ref.set({
       color: '#FFFFFF',
       mapPositionTop: 70,
       mapPositionLeft: 33
-    },
+      },
    c: {
       id: 'c',
       name: "Checkpoint Three",
@@ -31,7 +31,7 @@ ref.set({
       color: '#FFFFFF',
       mapPositionTop: 50,
       mapPositionLeft: 45
-    },
+      },
     d: {
       id: 'd',
       name: "Checkpoint Four",
@@ -41,15 +41,15 @@ ref.set({
       color: '#FFFFFF',
       mapPositionTop: 12,
       mapPositionLeft: 65
-    },
+      },
     e: {
       id: 'e',
       name: "Checkpoint Five",
-      realName: "The White Hart",
-      position: { latitude: 51.520052, longitude: -0.056208 },
+      realName: "The Ten Bells",
+      position: { latitude: 51.519323, longitude: -0.074320 },
       located: false,
       color: '#FFFFFF',
       mapPositionTop: 85,
       mapPositionLeft: 80
-    }
+      }
   });
