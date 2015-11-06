@@ -54,7 +54,8 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
       var checkpointData = ref.child(userLink).child('checkpoints').child(checkpointId);
       if (distanceToTarget < 0.02) {
         checkpointData.update({
-        located: true
+        located: true,
+        color: '#33F540'
         })
       };
       checkpointData.update( changeColour(distanceToTarget) );
@@ -81,10 +82,9 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
         return ({color: '#F50733'})
       }
       else {
-        return ({color: '#33F540'})
+        return ({color: '#9BB9E8'})
       }
     };
-
   }
 
 

@@ -26,16 +26,16 @@
       <div id="tabs" ng-controller="tabCtrl as tabCtrl">
         <h3 id="title">Checkpoint Game<h3>
         <ul>
-          <li ng-class = "{active:tabCtrl.isSelected('map')}">
+          <li class = "indiv_tab" ng-class = "{active:tabCtrl.isSelected('map')}">
             <a href ng-click = "tabCtrl.selectTab('map')">Map</a>
           </li>
-          <li ng-class = "{active:tabCtrl.isSelected('players')}">
+          <li class = "indiv_tab" ng-class = "{active:tabCtrl.isSelected('players')}">
             <a href ng-click = "tabCtrl.selectTab('players')">Players</a>
           </li>
-          <li ng-class = "{active:tabCtrl.isSelected('rules')}">
+          <li class = "indiv_tab" ng-class = "{active:tabCtrl.isSelected('rules')}">
             <a href ng-click = "tabCtrl.selectTab('rules')">Rules</a>
           </li>
-          <li>
+          <li class = "indiv_tab">
             <a href ng-click="userCtrl.userLogout()">Sign out</a>
           </li>
         </ul>
@@ -80,21 +80,32 @@
     </div>
 
     <div id="signed-out" ng-hide="userCtrl.authData">
-      <div>
-        <form>
-          <input type="text" ng-model="userCtrl.username" placeholder="username" required/>
-          <input type="text" ng-model="userCtrl.newEmail" placeholder="email" required/>
-          <input type="password" ng-model="userCtrl.newPassword" placeholder="password" required/>
-          <input type="password" ng-model="userCtrl.confirmPassword" placeholder="confirm password" required/>
-          <button ng-click="userCtrl.userSignup()">Sign up</button>
-        </form>
+      <div id="title_wrapper"
+        <span class="title1">Hot,</span><span class="title2"> Hot, </span><span class="title3">Cold</span>
       </div>
-      <div>
-        <form>
-          <input type="text" ng-model="userCtrl.email" placeholder="email"/>
-          <input type="password" ng-model="userCtrl.password" placeholder="password"/>
-          <button ng-click="userCtrl.userLogin()">Sign in</button>
-        </form>
+      <div id="login_wrapper">
+        <div>
+          <form>
+            <div>
+              <input class="input-form" type="text" ng-model="userCtrl.username" placeholder="Username" required/><br>
+              <input class="input-form" type="text" ng-model="userCtrl.newEmail" placeholder="Email" required/><br>
+              <input class="input-form" type="password" ng-model="userCtrl.newPassword" placeholder="Password" required/><br>
+              <input class="input-form" type="password" ng-model="userCtrl.confirmPassword" placeholder="Confirm Password" required/>
+            </div>
+            <button class="sign-up-button"ng-click="userCtrl.userSignup()">Sign up</button>
+          </form>
+        </div>
+        <div>
+          <form>
+            <!-- <h1 id="sign_in_title">Sign In</h1> -->
+            <br>
+            <input class="input-form" type="text" ng-model="userCtrl.email" placeholder="Email"/>
+            <br>
+            <input class="input-form" type="password" ng-model="userCtrl.password" placeholder="Password"/>
+            <br>
+            <button class="sign-in-button" ng-click="userCtrl.userLogin()">Sign in</button>
+          </form>
+        </div>
       </div>
     </div>
   </body>
