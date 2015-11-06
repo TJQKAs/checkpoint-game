@@ -26,6 +26,7 @@
     <div id="signed-in" ng-show="userCtrl.authData">
       <div id="tabs" ng-controller="tabCtrl as tabCtrl">
         <h3 id="title">Checkpoint Game</h3>
+        <h3 id="hello">Good luck {{userCtrl.username}}!<h3>
         <ul>
           <li class = "indiv_tab" ng-class = "{active:tabCtrl.isSelected('map')}">
             <a href ng-click = "tabCtrl.selectTab('map')">Map</a>
