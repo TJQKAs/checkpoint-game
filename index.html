@@ -42,52 +42,45 @@
         <div>
           <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
             <div ng-controller="GameController as gameCtrl">
-
               <div ng-hide="gameCtrl.nextUserCheckpoint">
                 <button ng-click="gameCtrl.startGame()">Start New Game</button>
               </div>
-
               <div ng-show="gameCtrl.userCheckpoints">
                 <ul class="list-group">
                   <li ng-repeat="checkpoint in gameCtrl.userCheckpoints">
                     <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">{{$index + 1}}</button>
                   </li>
                 </ul>
-              <div ng-controller="LocationController as locationCtrl">
-                <div>
-                  Current location:<br>
-                  Latitude {{locationCtrl.latitude}}<br>
-                  Longitude {{locationCtrl.longitude}}
+                <div ng-controller="LocationController as locationCtrl">
+                  <div>
+                    Current location:<br>
+                    Latitude {{locationCtrl.latitude}}<br>
+                    Longitude {{locationCtrl.longitude}}
+                  </div>
+                  <button ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
+                  <div ng-show="!gameCtrl.nextUserCheckpoint && gameCtrl.userCheckpoints">
+                    Congratulations! You've found all the checkpoints!
+                  </div>
                 </div>
-
-                <button ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
-
-                <div ng-show="!gameCtrl.nextUserCheckpoint && gameCtrl.userCheckpoints">
-                Congratulations! You've found all the checkpoints!
-                </div>
-
               </div>
             </div>
-
-            </div>
           </div>
-            <div id = "players" ng-show = "tabCtrl.isSelected('players')">
-              <ul>
-                <div ng-repeat ="player in userCtrl.allPlayers">
-                  <li>
-                    {{player.name}}<span ng-repeat="checkpoint in player.checkpoints"><button style="background-color:{{checkpoint.color}};">{{checkpoint.id}}</button></span>
-                  </li>
-                  <br>
-                </div>
-              </ul>
-            </div>
-            <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
-              RULES
-            </div>
+          <div id = "players" ng-show = "tabCtrl.isSelected('players')">
+            <ul>
+              <div ng-repeat ="player in userCtrl.allPlayers">
+                <li>
+                  {{player.name}}<span ng-repeat="checkpoint in player.checkpoints"><button style="background-color:{{checkpoint.color}};">{{checkpoint.id}}</button></span>
+                </li>
+                <br>
+              </div>
+            </ul>
+          </div>
+          <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
+            RULES
+          </div>
         </div>
       </div>
     </div>
-
     <div id="signed-out" ng-hide="userCtrl.authData">
       <div id="title_wrapper"
         <span class="title1">Hot,</span><span class="title2"> Hot, </span><span class="title3">Cold</span>
