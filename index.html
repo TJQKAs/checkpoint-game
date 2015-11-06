@@ -57,7 +57,7 @@
                     Latitude {{locationCtrl.latitude}}<br>
                     Longitude {{locationCtrl.longitude}}
                   </div>
-                  <button ng-disabled="true" ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
+                  <button ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
                   <div ng-show="!gameCtrl.nextUserCheckpoint && gameCtrl.userCheckpoints">
                     Congratulations! You've found all the checkpoints!
                   </div>
