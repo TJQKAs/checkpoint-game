@@ -28,10 +28,12 @@ checkpointApp.controller('GameController', function(DatabaseDataFactory){
         self.userCheckpoints = snapshot.val();
       })
 
+      self.nextUserCheckpoint = null;
+
       for (var key in self.userCheckpoints) {
         var val = self.userCheckpoints[key];
         if (val.located === false) {
-          self.nextUserCheckpoint = val
+          self.nextUserCheckpoint = val;
           break
         }
       }
