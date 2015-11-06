@@ -22,6 +22,7 @@
   </head>
 
   <body ng-controller="UserController as userCtrl">
+
     <div id="signed-in" ng-show="userCtrl.authData">
       <div id="tabs" ng-controller="tabCtrl as tabCtrl">
         <h3 id="title">Checkpoint Game</h3>
@@ -39,7 +40,7 @@
             <a href ng-click="userCtrl.userLogout()">Sign out</a>
           </li>
         </ul>
-        <div>
+        <div ng-controller="GameController as gameCtrl">
           <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
               <div id = 'legend'>
                 <div style = 'background-color: #FFFFFF'>Unlocked</div>
@@ -51,46 +52,48 @@
                 <div style = 'background-color: #F50733'>HOT</div>
                 <div style = 'background-color: #26ED33'>YOU ARE THERE!</div>
               </div>
-            <div ng-controller="GameController as gameCtrl">
+            <div>
               <div ng-show="!gameCtrl.nextCheckpoint || gameCtrl.gameComplete">
                 <button ng-click="gameCtrl.startGame()">Start New Game</button>
               </div>
               <div ng-show="gameCtrl.userCheckpoints">
-                  <span ng-repeat="checkpoint in gameCtrl.userCheckpoints">
-                    <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">{{$index + 1}}</button>
-                  </span>
+                <span ng-repeat="checkpoint in gameCtrl.userCheckpoints">
+                  <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">{{$index + 1}}</button>
+                </span>
 
-                  <div>
-                    Clue: {{gameCtrl.nextCheckpoint.clue}}
+                <div>
+                  Clue: {{gameCtrl.nextCheckpoint.clue}}
+                </div>
+
+                <div>
+                  <button ng-hide="gameCtrl.runningCheckIn || gameCtrl.gameComplete" id="check-in" ng-click="gameCtrl.checkIn()">Check In</button>
+
+
+                  <div ng-show="gameCtrl.gameComplete">
+                  Congratulations! You've found all the checkpoints!
                   </div>
-
-              <div>
-                <button ng-hide="gameCtrl.runningCheckIn || gameCtrl.gameComplete" id="check-in" ng-click="gameCtrl.checkIn()">Check In</button>
-
-
-                <div ng-show="gameCtrl.gameComplete">
-                Congratulations! You've found all the checkpoints!
                 </div>
               </div>
             </div>
           </div>
-            <div id = "players" ng-show = "tabCtrl.isSelected('players')">
-              <ul>
-                <div ng-repeat ="player in gameCtrl.allPlayers">
-                  <li>
-                    {{player.name}}<span ng-repeat="checkpoint in player.checkpoints"><button style="background-color:{{checkpoint.color}};">{{checkpoint.id}}</button></span>
-                  </li>
-                  <br>
-                </div>
-              </ul>
-            </div>
-            <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
-              RULES
-            </div>
+          <div id = "players" ng-show = "tabCtrl.isSelected('players')">
+            <ul>
+              <div ng-repeat ="player in gameCtrl.allPlayers">
+                <li>
+                  {{player.name}}<span ng-repeat="checkpoint in player.checkpoints"><button style="background-color:{{checkpoint.color}};">{{checkpoint.id}}</button></span>
+                </li>
+                <br>
+              </div>
+            </ul>
+          </div>
+          <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
+            RULES
+          </div>
         </div>
+
       </div>
     </div>
-    </div>
+
     <div id="signed-out" ng-hide="userCtrl.authData">
       <div id="title_wrapper"
         <span class="title1">Hot,</span><span class="title2"> Hot, </span><span class="title3">Cold</span>
@@ -120,5 +123,6 @@
         </div>
       </div>
     </div>
+
   </body>
 </html>
