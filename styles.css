@@ -95,3 +95,9 @@ button.checkpoint {
   color: #447BF2;
 
 }
+
+#legend {
+  border: solid;
+  border-width: 1px;
+  border-color: #447BF2;
+}
