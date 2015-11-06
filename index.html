@@ -42,10 +42,12 @@
         <div>
           <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
             <div ng-controller="GameController as gameCtrl">
+
               <div ng-hide="gameCtrl.nextUserCheckpoint">
-                <button ng-click="gameCtrl.startGame()">Start Game</button>
+                <button ng-click="gameCtrl.startGame()">Start New Game</button>
               </div>
-              <div ng-show="gameCtrl.nextUserCheckpoint">
+
+              <div ng-show="gameCtrl.userCheckpoints">
                 <ul class="list-group">
                   <li ng-repeat="checkpoint in gameCtrl.userCheckpoints">
                     <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">{{$index + 1}}</button>
@@ -57,9 +59,16 @@
                   Latitude {{locationCtrl.latitude}}<br>
                   Longitude {{locationCtrl.longitude}}
                 </div>
-                <button id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
+
+                <button ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
+
+                <div ng-show="!gameCtrl.nextUserCheckpoint && gameCtrl.userCheckpoints">
+                Congratulations! You've found all the checkpoints!
+                </div>
+
               </div>
             </div>
+
             </div>
           </div>
             <div id = "players" ng-show = "tabCtrl.isSelected('players')">
