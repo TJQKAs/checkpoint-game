@@ -46,11 +46,14 @@
                 <button ng-click="gameCtrl.startGame()">Start New Game</button>
               </div>
               <div ng-show="gameCtrl.userCheckpoints">
-                <ul class="list-group">
-                  <li ng-repeat="checkpoint in gameCtrl.userCheckpoints">
+                  <span ng-repeat="checkpoint in gameCtrl.userCheckpoints">
                     <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">{{$index + 1}}</button>
-                  </li>
-                </ul>
+                  </span>
+
+                  <div>
+                    Clue: {{gameCtrl.nextUserCheckpoint.clue}}
+                  </div>
+
                 <div ng-controller="LocationController as locationCtrl">
                   <div>
                     Current location:<br>

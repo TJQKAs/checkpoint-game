@@ -10,7 +10,8 @@ ref.set({
       located: false,
       color: '#FFFFFF',
       mapPositionTop: 21,
-      mapPositionLeft: 17
+      mapPositionLeft: 17,
+      clue: "Dummy clue 1"
       },
   b: {
       id: 'b',
@@ -20,7 +21,8 @@ ref.set({
       located: false,
       color: '#FFFFFF',
       mapPositionTop: 70,
-      mapPositionLeft: 33
+      mapPositionLeft: 33,
+      clue: "Dummy clue 2"
       },
    c: {
       id: 'c',
@@ -30,7 +32,9 @@ ref.set({
       located: false,
       color: '#FFFFFF',
       mapPositionTop: 50,
-      mapPositionLeft: 45
+      mapPositionLeft: 45,
+      clue: "Dummy clue 3"
+
       },
     d: {
       id: 'd',
@@ -40,7 +44,8 @@ ref.set({
       located: false,
       color: '#FFFFFF',
       mapPositionTop: 12,
-      mapPositionLeft: 65
+      mapPositionLeft: 65,
+      clue: "Dummy clue 4"
       },
     e: {
       id: 'e',
@@ -50,6 +55,7 @@ ref.set({
       located: false,
       color: '#FFFFFF',
       mapPositionTop: 85,
-      mapPositionLeft: 80
+      mapPositionLeft: 80,
+      clue: "Dummy clue 5"
       }
   });
