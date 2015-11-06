@@ -101,7 +101,7 @@ button.checkpoint {
 
 }
 
-#legend {
+/*#legend {
   border: solid;
   border-width: 1px;
   border-color: #447BF2;
@@ -111,4 +111,16 @@ button.checkpoint {
   bottom: 0;
   right: 0;
   width: 10%;
+}*/
+
+#legend {
+  border: solid;
+  border-width: 1px;
+  border-color: #447BF2;
+  text-align: center;
+  font-size: 17px;
+  position: absolute;
+  width: 17%;
+  bottom: 0;
+  left: 0;
 }

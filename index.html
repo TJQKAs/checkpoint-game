@@ -41,9 +41,18 @@
             <a href ng-click="userCtrl.userLogout()">Sign out</a>
           </li>
         </ul>
-
         <div ng-controller="GameController as gameCtrl">
-          <div id = "map" ng-show = "tabCtrl.isSelected('map')">
+          <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
+              <div id = 'legend'>
+                <div style = 'background-color: #FFFFFF'>Unlocked</div>
+                <div style = 'background-color: #26C2ED'>FEEEZING</div>
+                <div style = 'background-color: #447BF2'>VERY COLD</div>
+                <div style = 'background-color: #A68AED'>COLD</div>
+                <div style = 'background-color: #F0B6D8'>QUITE WARM</div>
+                <div style = 'background-color: #F257A5'>VERY WARM</div>
+                <div style = 'background-color: #F50733'>HOT</div>
+                <div style = 'background-color: #26ED33'>YOU ARE THERE!</div>
+              </div>
             <div>
               <div ng-show="!gameCtrl.nextCheckpoint || gameCtrl.gameComplete">
                 <button ng-click="gameCtrl.startGame()">Start New Game</button>
@@ -60,16 +69,6 @@
                 <div>
                   <button ng-hide="gameCtrl.runningCheckIn || gameCtrl.gameComplete" id="check-in" ng-click="gameCtrl.checkIn()">Check In</button>
 
-                  <div id = 'legend'>
-                    <div style = 'background-color: #FFFFFF'>Unlocked</div>
-                    <div style = 'background-color: #26C2ED'>FEEEZING</div>
-                    <div style = 'background-color: #447BF2'>VERY COLD</div>
-                    <div style = 'background-color: #A68AED'>COLD</div>
-                    <div style = 'background-color: #F0B6D8'>QUITE WARM</div>
-                    <div style = 'background-color: #F257A5'>VERY WARM</div>
-                    <div style = 'background-color: #F50733'>HOT</div>
-                    <div style = 'background-color: #26ED33'>YOU ARE THERE!</div>
-                  </div>
 
                   <div ng-show="gameCtrl.gameComplete">
                   Congratulations! You've found all the checkpoints!
