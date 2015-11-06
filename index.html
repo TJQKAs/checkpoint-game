@@ -42,7 +42,7 @@
         <div>
           <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
             <div ng-controller="GameController as gameCtrl">
-              <div ng-hide="gameCtrl.nextCheckpoint">
+              <div ng-show="!gameCtrl.nextCheckpoint || gameCtrl.gameComplete">
                 <button ng-click="gameCtrl.startGame()">Start New Game</button>
               </div>
               <div ng-show="gameCtrl.userCheckpoints">
@@ -55,7 +55,7 @@
                   </div>
 
               <div>
-                <button ng-hide="gameCtrl.runningCheckIn" id="check-in" ng-click="gameCtrl.checkIn()">Check In</button>
+                <button ng-hide="gameCtrl.runningCheckIn || gameCtrl.gameComplete" id="check-in" ng-click="gameCtrl.checkIn()">Check In</button>
 
               <div id = 'legend'>
                 <div style = 'background-color: #FFFFFF'>Unlocked</div>
