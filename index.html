@@ -14,8 +14,8 @@
     <script src="bower_components/geofire/dist/geofire.js"></script>
     <script src="app/js/app.js"></script>
     <script src="app/js/databaseDataFactory.js"></script>
+    <script src="app/js/userLocationFactory.js"></script>
     <script src="app/js/gameController.js"></script>
-    <script src="app/js/locationController.js"></script>
     <script src="app/js/userController.js"></script>
     <script src="app/js/tabController.js"></script>
 
@@ -24,7 +24,7 @@
   <body ng-controller="UserController as userCtrl">
     <div id="signed-in" ng-show="userCtrl.authData">
       <div id="tabs" ng-controller="tabCtrl as tabCtrl">
-        <h3 id="title">Checkpoint Game<h3>
+        <h3 id="title">Checkpoint Game</h3>
         <ul>
           <li class = "indiv_tab" ng-class = "{active:tabCtrl.isSelected('map')}">
             <a href ng-click = "tabCtrl.selectTab('map')">Map</a>
@@ -42,7 +42,7 @@
         <div>
           <div id = "map" ng-show = "tabCtrl.isSelected('map')" >
             <div ng-controller="GameController as gameCtrl">
-              <div ng-hide="gameCtrl.nextUserCheckpoint">
+              <div ng-hide="gameCtrl.nextCheckpoint">
                 <button ng-click="gameCtrl.startGame()">Start New Game</button>
               </div>
               <div ng-show="gameCtrl.userCheckpoints">
@@ -51,16 +51,12 @@
                   </span>
 
                   <div>
-                    Clue: {{gameCtrl.nextUserCheckpoint.clue}}
+                    Clue: {{gameCtrl.nextCheckpoint.clue}}
                   </div>
 
-                <div ng-controller="LocationController as locationCtrl">
-                  <div>
-                    Current location:<br>
-                    Latitude {{locationCtrl.latitude}}<br>
-                    Longitude {{locationCtrl.longitude}}
-                  </div>
-                  <button ng-show="gameCtrl.nextUserCheckpoint" id="check-in" ng-click="locationCtrl.checkIn(gameCtrl.nextUserCheckpoint)">Check In</button>
+              <div>
+                <button ng-hide="gameCtrl.runningCheckIn" id="check-in" ng-click="gameCtrl.checkIn()">Check In</button>
+
               <div id = 'legend'>
                 <div style = 'background-color: #FFFFFF'>Unlocked</div>
                 <div style = 'background-color: #26C2ED'>FEEEZING</div>
@@ -71,28 +67,29 @@
                 <div style = 'background-color: #F50733'>HOT</div>
                 <div style = 'background-color: #26ED33'>YOU ARE THERE!</div>
               </div>
-                  <div ng-show="!gameCtrl.nextUserCheckpoint && gameCtrl.userCheckpoints">
-                    Congratulations! You've found all the checkpoints!
-                  </div>
+
+                <div ng-show="gameCtrl.gameComplete">
+                Congratulations! You've found all the checkpoints!
                 </div>
               </div>
             </div>
           </div>
-          <div id = "players" ng-show = "tabCtrl.isSelected('players')">
-            <ul>
-              <div ng-repeat ="player in userCtrl.allPlayers">
-                <li>
-                  {{player.name}}<span ng-repeat="checkpoint in player.checkpoints"><button style="background-color:{{checkpoint.color}};">{{checkpoint.id}}</button></span>
-                </li>
-                <br>
-              </div>
-            </ul>
-          </div>
-          <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
-            RULES
-          </div>
+            <div id = "players" ng-show = "tabCtrl.isSelected('players')">
+              <ul>
+                <div ng-repeat ="player in gameCtrl.allPlayers">
+                  <li>
+                    {{player.name}}<span ng-repeat="checkpoint in player.checkpoints"><button style="background-color:{{checkpoint.color}};">{{checkpoint.id}}</button></span>
+                  </li>
+                  <br>
+                </div>
+              </ul>
+            </div>
+            <div id = "rules" ng-show = "tabCtrl.isSelected('rules')">
+              RULES
+            </div>
         </div>
       </div>
+    </div>
     </div>
     <div id="signed-out" ng-hide="userCtrl.authData">
       <div id="title_wrapper"

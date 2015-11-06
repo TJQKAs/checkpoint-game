@@ -26,8 +26,6 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
     var geolocationCallback = function(location) {
       self.latitude = location.coords.latitude;
       self.longitude = location.coords.longitude;
-      // geoFire.set("Michael", [self.latitude, self.longitude]);
-      // console.log(self.longitude)
     };
 
     getLocation();
