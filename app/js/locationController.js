@@ -52,7 +52,7 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
       var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
       var checkpointId = checkpoint.id;
       var checkpointData = ref.child(userLink).child('checkpoints').child(checkpointId);
-      if (distanceToTarget < 0.02) {
+      if (distanceToTarget < 0.05) {
         checkpointData.update({
         located: true
         })
@@ -80,7 +80,7 @@ checkpointApp.controller("LocationController", function($scope, $firebaseObject,
       else if ( distanceToTarget > 0.1 ) {
         return ({color: '#F50733'})
       }
-      else if ( distanceToTarget < 0.02) {
+      else if ( distanceToTarget < 0.05) {
         return ({color: '#26ED33'})
       }
     };
