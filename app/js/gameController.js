@@ -1,43 +1,40 @@
-checkpointApp.controller('GameController', function(DatabaseDataFactory, UserLocationFactory){
+checkpointApp.controller('GameController', function($scope, $firebaseObject, DatabaseDataFactory, UserLocationFactory){
 
   var self = this;
   var ref = DatabaseDataFactory;
+  var syncObject = $firebaseObject(ref);
+
+  syncObject.$bindTo($scope, 'data');
+
   self.authData = ref.getAuth();
-
-
-  // if (self.authData) {
-  //   var userId = self.authData.uid
 
   if (self.authData) {
 
     var userLink = 'users/' + self.authData.uid
 
     self.startGame = function() {
+      console.log("set user checkpoints")
       ref.child(userLink).update({checkpoints: self.checkpoints});
     };
 
     self.checkIn = function() {
       self.runningCheckIn = true;
+      console.log("check in running? ", self.runningCheckIn)
       UserLocationFactory(function(returnVal){
         var userLocation = returnVal;
-        console.log("running: ", self.runningCheckIn)
-        console.log(userLocation, "beep");
 
-        // var checkpointId = self.nextCheckpoint.id;
-        // var checkpointData = ref.child(userLink).child('checkpoints').child(checkpointId);
-        // var targetLocation = [self.nextCheckpoint.position.latitude, self.nextCheckpoint.position.longitude];
-        // var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
-        // checkpointData.update( dataChanges(distanceToTarget) );
-
+        console.log("check in still running? ", self.runningCheckIn)
+        console.log("user located at: ", userLocation);
 
         self.checkInResultUpdate(userLocation)
-        self.runningCheckIn = null;
-        console.log("running: ", self.runningCheckIn);
+        self.runningCheckIn = false;
+        $scope.$apply();
+        console.log("check in still running? ", self.runningCheckIn);
       });
     };
 
     self.checkInResultUpdate = function(userLocation) {
-      console.log("update run now");
+      console.log("run db update now");
       var checkpointId = self.nextCheckpoint.id;
       var checkpointData = ref.child(userLink).child('checkpoints').child(checkpointId);
       var targetLocation = [self.nextCheckpoint.position.latitude, self.nextCheckpoint.position.longitude];
@@ -46,6 +43,7 @@ checkpointApp.controller('GameController', function(DatabaseDataFactory, UserLoc
     };
 
     var dataChanges = function(distanceToTarget) {
+      console.log("changing colours")
       if (distanceToTarget > 5) {
         return ({color: '#9BB9E8'})
       }
@@ -78,18 +76,30 @@ checkpointApp.controller('GameController', function(DatabaseDataFactory, UserLoc
 
       ref.child(userLink).child('checkpoints').once('value', function(snapshot) {
         self.userCheckpoints = snapshot.val();
-        console.log("get user checkpoints");
-        for (var key in self.userCheckpoints) {
-          var val = self.userCheckpoints[key];
-          if (val.located === false) {
-            self.nextCheckpoint = val;
+        console.log("get user checkpoints: ", self.userCheckpoints);
+
+        snapshot.forEach(function(checkpoint){
+          self.gameComplete = checkpoint.val().located
+        })
+
+        console.log("all located? ", self.gameComplete)
+
+        snapshot.forEach(function(element){
+          checkpoint = element.val();
+          if (!checkpoint.located) {
             console.log("set next checkpoint");
+            self.nextCheckpoint = checkpoint;
             console.log("next checkpoint: ", self.nextCheckpoint)
-            break
-          }
-        }
-      })
-      // self.nextUserCheckpoint = null;
+            return self.nextCheckpoint;
+          };
+        })
+
+      });
+
+      ref.child('users').once('value', function(snapshot) {
+        self.allPlayers = snapshot.val();
+      });
+
     });
 
   }

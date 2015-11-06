@@ -5,12 +5,6 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
 
   self.authData = ref.getAuth();
 
-  if (self.authData) {
-    console.log("User " + self.authData.uid + " is logged in with " + self.authData.provider);
-  } else {
-    console.log("User is logged out");
-  }
-
   validateUserInput = function(){
     var password = self.newPassword;
     if (password.length < 8) {throw alert("Password must be over 8 characters in length")};
@@ -60,9 +54,5 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
     ref.unauth();
     document.location.reload();
   };
-
-  ref.child('users').once('value', function(snapshot) {
-    self.allPlayers = snapshot.val();
-  });
 
 });

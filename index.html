@@ -62,7 +62,7 @@
 
                 <button ng-hide="gameCtrl.runningCheckIn" id="check-in" ng-click="gameCtrl.checkIn()">Check In</button>
 
-                <div ng-hide="gameCtrl.nextCheckpoint && gameCtrl.userCheckpoints">
+                <div ng-show="gameCtrl.gameComplete">
                 Congratulations! You've found all the checkpoints!
                 </div>
 
@@ -73,7 +73,7 @@
           </div>
             <div id = "players" ng-show = "tabCtrl.isSelected('players')">
               <ul>
-                <div ng-repeat ="player in userCtrl.allPlayers">
+                <div ng-repeat ="player in gameCtrl.allPlayers">
                   <li>
                     {{player.name}}<span ng-repeat="checkpoint in player.checkpoints"><button style="background-color:{{checkpoint.color}};">{{checkpoint.id}}</button></span>
                   </li>
