@@ -60,7 +60,7 @@ checkpointApp.controller('GameController', function($scope, $firebaseObject, Dat
       else if ( distanceToTarget > 0.2 ) {
         return ({color: '#F257A5'})
       }
-      else if ( distanceToTarget > 0.02 ) {
+      else if ( distanceToTarget > 0.1 ) {
         return ({color: '#F50733'})
       }
       else {
