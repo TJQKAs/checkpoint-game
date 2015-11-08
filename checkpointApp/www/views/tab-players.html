@@ -1,14 +1,19 @@
 <ion-view>
   <ion-content class="padding">
-  PLAYERS
-  PLAYERS
-  PLAYERS
-  PLAYERS
-  PLAYERS
-  PLAYERS
-  PLAYERS
-  PLAYERS
-  PLAYERS
-  PLAYERS
+    <div id="players">
+      <ul>
+        <div ng-repeat ="player in allPlayers">
+          <li>
+            {{player.name}}:
+            <span ng-repeat="checkpoint in player.checkpoints">
+              <button class="checkpoint" style="background-color:{{checkpoint.color}};">
+                {{$index + 1}}
+              </button>
+            </span>
+          </li>
+          <br>
+        </div>
+      </ul>
+    </div>
   </ion-content>
 </ion-view>

@@ -1,36 +1,49 @@
 <ion-view>
   <ion-content class="padding">
 
+    <h4>Good luck {{username}}</h4>
+
     <div ng-show="gameComplete || !nextCheckpoint">
       <button ng-click="startGame()" class="button button-block button-balanced">
         Start New Game
       </button>
     </div>
 
-    <div ng-hide="gameComplete || !nextCheckpoint">
+    <div id="map">
+      <span ng-repeat="checkpoint in userCheckpoints">
+        <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">
+          {{$index + 1}}
+        </button>
+      </span>
+    </div>
 
-      <div id="map" ng-show="userCheckpoints">
-        <span ng-repeat="checkpoint in userCheckpoints">
-          <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">
-            {{$index + 1}}
-          </button>
-        </span>
-      </div>
-
+    <div ng-show="nextCheckpoint">
       <div>
         Clue: {{nextCheckpoint.clue}}
       </div>
-
+      <div ng-show="runningCheckIn">
+        <ion-spinner icon="spiral"></ion-spinner>
+      </div>
       <div ng-hide="runningCheckIn || gameComplete">
         <button ng-click="checkIn()" class="button button-block button-balanced">
           Check In
         </button>
       </div>
+    </div>
 
-      <div ng-show="gameComplete">
-      Congratulations! You've found all the checkpoints!
-      </div>
+    <div ng-show="gameComplete">
+      <h5>Congratulations! You've found all the checkpoints!</h5>
+    </div>
 
+    <div id = 'legend'>
+      <div style = 'background-color: #FFFFFF'>Unlocked</div>
+      <div style = 'background-color: #26C2ED'>FEEEZING</div>
+      <div style = 'background-color: #447BF2'>VERY COLD</div>
+      <div style = 'background-color: #A68AED'>COLD</div>
+      <div style = 'background-color: #F0B6D8'>QUITE WARM</div>
+      <div style = 'background-color: #F257A5'>VERY WARM</div>
+      <div style = 'background-color: #F50733'>HOT</div>
+      <div style = 'background-color: #26ED33'>YOU ARE THERE!</div>
     </div>
 
   </ion-content>

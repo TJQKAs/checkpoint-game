@@ -15,3 +15,7 @@ button.checkpoint {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.spinner svg {
+  stroke: #447BF2;
+}
