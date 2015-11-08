@@ -1,14 +1,37 @@
 <ion-view>
   <ion-content class="padding">
-    BINGO!
-    BINGO!
-    BINGO!
-    BINGO!
-    BINGO!
-    BINGO!
-    BINGO!
-    BINGO!
-    BINGO!
-    BINGO!
+
+    <div ng-show="gameComplete || !nextCheckpoint">
+      <button ng-click="startGame()" class="button button-block button-balanced">
+        Start New Game
+      </button>
+    </div>
+
+    <div ng-hide="gameComplete || !nextCheckpoint">
+
+      <div id="map" ng-show="userCheckpoints">
+        <span ng-repeat="checkpoint in userCheckpoints">
+          <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">
+            {{$index + 1}}
+          </button>
+        </span>
+      </div>
+
+      <div>
+        Clue: {{nextCheckpoint.clue}}
+      </div>
+
+      <div ng-hide="runningCheckIn || gameComplete">
+        <button ng-click="checkIn()" class="button button-block button-balanced">
+          Check In
+        </button>
+      </div>
+
+      <div ng-show="gameComplete">
+      Congratulations! You've found all the checkpoints!
+      </div>
+
+    </div>
+
   </ion-content>
 </ion-view>
