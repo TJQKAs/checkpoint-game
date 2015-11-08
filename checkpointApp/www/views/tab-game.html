@@ -21,9 +21,6 @@
       <div>
         Clue: {{nextCheckpoint.clue}}
       </div>
-      <div ng-show="runningCheckIn">
-        <ion-spinner icon="spiral"></ion-spinner>
-      </div>
       <div ng-hide="runningCheckIn || gameComplete">
         <button ng-click="checkIn()" class="button button-block button-balanced">
           Check In
