@@ -24,15 +24,34 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
-  </head>
-  <body ng-app="CheckpointApp">
+    <script src="js/controllers/userController.js"></script>
+    <script src="js/services/databaseDataFactory.js"></script>
+    <script src="js/services/userAdminFactory.js"></script>
 
+  </head>
+  <body ng-app="CheckpointApp" ng-controller="UserCtrl">
     <ion-pane>
-      <ion-header-bar class="bar-stable">
+
+      <ion-header-bar align-title="left" class="bar-stable">
         <h1 class="title">Checkpoint Game</h1>
+        <div class="buttons" ng-show="authData">
+          <button ng-click="userLogout()" class="bar-assertive">
+            Sign out
+          </button>
+        </div>
       </ion-header-bar>
-      <ion-content>
-      </ion-content>
+
+      <div ng-hide="authData">
+      <ion-nav-view name="authenticate"></ion-nav-view>
+      </div>
+
+      <div ng-show="authData">
+      <ion-nav-view name="home"></ion-nav-view>
+      </div>
+
+      <ion-footer-bar class="bar-stable">
+      </ion-footer-bar>
+
     </ion-pane>
   </body>
 </html>
