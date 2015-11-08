@@ -52,7 +52,7 @@ checkpointApp.controller("UserController", function(DatabaseDataFactory) {
       if (error) {
         console.log("Login Failed!", error);
       } else {
-        console.log("Authenticated successfully with payload:", authData);
+        console.log("Authenticated successfully with payload: ", authData);
         document.location.reload();
       }
     });
