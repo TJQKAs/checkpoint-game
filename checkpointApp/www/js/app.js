@@ -12,33 +12,49 @@ checkpointApp.config(function($stateProvider, $urlRouterProvider) {
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
-  $stateProvider
-
-  // .state('main', {
-  //   url: '/main',
-  //   views: {
-  //     'main': {
-  //       template: 'partials/main.html',
-  //       controller: 'userCtrl'
-  //     }
-  //   }
-  // })
-
-  .state('index', {
+  $stateProvider.state('index', {
     url: '',
     views: {
       'authenticate': {
         templateUrl: 'views/authenticate.html',
         controller: 'UserCtrl'
       },
-      'home': {
-        templateUrl: 'views/home.html',
-        controller: 'UserCtrl'
+      'tabs': {
+        templateUrl: 'views/tabs.html'
       }
     }
-  });
+  })
+
+  .state('index.game', {
+    url: '/game',
+    views: {
+      'tab-game': {
+        templateUrl: 'views/tab-game.html',
+        controller: 'GameCtrl'
+      }
+    }
+  })
+
+  .state('index.players', {
+    url: '/players',
+    views: {
+      'tab-players': {
+        templateUrl: 'views/tab-players.html',
+        controller: 'GameCtrl'
+      }
+    }
+  })
+
+  .state('index.rules', {
+    url: '/rules',
+    views: {
+      'tab-rules': {
+        templateUrl: 'views/tab-rules.html'
+      }
+    }
+  })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('');
+  $urlRouterProvider.otherwise('/index/game');
 
 });

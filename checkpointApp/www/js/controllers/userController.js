@@ -14,7 +14,7 @@ checkpointApp.controller("UserCtrl", function(DatabaseDataFactory, UserAdminFact
 
   $scope.signupPopUp = function() {
     $ionicPopup.show({
-      templateUrl: 'views/user-signup.html',
+      templateUrl: 'views/authenticate-signup.html',
       title: 'Give us ya deets!',
       subTitle: '...please',
       scope: $scope,
@@ -26,7 +26,7 @@ checkpointApp.controller("UserCtrl", function(DatabaseDataFactory, UserAdminFact
 
   $scope.loginPopUp = function() {
     $ionicPopup.show({
-      templateUrl: 'views/user-login.html',
+      templateUrl: 'views/authenticate-login.html',
       title: 'Give us ya deets!',
       subTitle: '...please',
       scope: $scope,
@@ -41,14 +41,14 @@ checkpointApp.controller("UserCtrl", function(DatabaseDataFactory, UserAdminFact
     var userPassword = this.newPassword;
     var confirmPassword = this.confirmPassword;
     var username = this.username;
-    UserAdminFactory.validateUserInput(username, userPassword, confirmPassword);
+    UserAdminFactory.validate(username, userPassword, confirmPassword);
     UserAdminFactory.signUp(username, userEmail, userPassword);
   };
 
   $scope.userLogin = function() {
     var userEmail = this.email;
     var userPassword = this.password;
-    UserAdminFactory.loginUser(userEmail, userPassword);
+    UserAdminFactory.login(userEmail, userPassword);
   };
 
   $scope.userLogout = function() {
