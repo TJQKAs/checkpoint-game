@@ -4,12 +4,14 @@
       <ul>
         <div ng-repeat ="player in allPlayers">
           <li>
-            {{player.name}}:
-            <span ng-repeat="checkpoint in player.checkpoints">
-              <button class="checkpoint" style="background-color:{{checkpoint.color}};">
-                {{$index + 1}}
-              </button>
-            </span>
+            <b>{{player.name}}:</b>
+            <div class = "button_wrapper">
+              <span ng-repeat="checkpoint in player.checkpoints">
+                <button class="checkpoint" style="background-color:{{checkpoint.color}};">
+                  {{$index + 1}}
+                </button>
+              </span>
+            </div>
           </li>
           <br>
         </div>

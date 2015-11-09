@@ -6,6 +6,10 @@ button.checkpoint {
   background-color: white;
 }
 
+.button_wrapper {
+  float: right;
+}
+
 #map {
   position:relative;
   width: 100%;
