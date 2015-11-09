@@ -12,7 +12,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
     $scope.startGame = function() {
       console.log("set user checkpoints")
-      ref.child(userLink).update({checkpoints: $scope.checkpoints});
+      ref.child(userLink).child('games').update($scope.game);
     };
 
     $scope.checkIn = function() {
@@ -68,8 +68,9 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
     ref.on('value', function(dataSnapshot){
 
-      ref.child('games/game1/checkpoints').once('value', function(snapshot) {
-        $scope.checkpoints = snapshot.val();
+      ref.child('games/game1').once('value', function(snapshot) {
+        $scope.game = snapshot;
+        $scope.gameKey = snapshot.key();
         console.log("get game checkpoints")
       })
 
