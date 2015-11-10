@@ -1,4 +1,4 @@
-checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocationFactory, $scope, $state, $firebaseObject){
+checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocationFactory, $scope, $state, $firebaseObject, $ionicPopup){
 
   var ref = DatabaseDataFactory;
   var syncObject = $firebaseObject(ref);
@@ -10,10 +10,27 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
     var userLink = 'users/' + $scope.authData.uid
 
-    $scope.startGame = function() {
-      console.log("set user checkpoints")
-      ref.child(userLink).child('games').update($scope.game);
+    $scope.startGame = function(gameName) {
+      var gameLink = 'games/' + gameName
+      var startTime = new Date();
+      ref.child(gameLink).once('value', function(snapshot) {
+        var game = snapshot.val();
+        ref.child(userLink).child(gameLink).update(game);
+        ref.child(userLink).child(gameLink).update({started: startTime});
+        document.location.reload();
+      })
     };
+
+    $scope.startGamePopup = function() {
+      $ionicPopup.show({
+        templateUrl: 'views/tab-game-select.html',
+        title: 'Please select a game',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' }
+        ]
+      });
+    }
 
     $scope.checkIn = function() {
       $scope.runningCheckIn = true;
@@ -35,9 +52,11 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
     $scope.checkInResultUpdate = function(userLocation) {
       console.log("run db update now");
       var checkpointId = $scope.nextCheckpoint.id;
-      var checkpointData = ref.child(userLink).child('checkpoints').child(checkpointId);
+      var link = userLink + '/games/' + $scope.currentGame;
+      var checkpointData = ref.child(link).child('checkpoints').child(checkpointId);
       var targetLocation = [$scope.nextCheckpoint.position.latitude, $scope.nextCheckpoint.position.longitude];
       var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
+      console.log("HIYA")
       checkpointData.update( dataChanges(distanceToTarget) );
     };
 
@@ -68,32 +87,38 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
     ref.on('value', function(dataSnapshot){
 
-      ref.child('games/game1').once('value', function(snapshot) {
-        $scope.game = snapshot;
-        $scope.gameKey = snapshot.key();
-        console.log("get game checkpoints")
+      if ($scope.currentGame) {
+        var link = userLink + '/games/' + $scope.currentGame;
+        ref.child(link).child('checkpoints').once('value', function(snapshot) {
+          $scope.userCheckpoints = snapshot.val();
+          if (isAllLocated(snapshot.val())) {
+            finishTime = new Date();
+            ref.child(link).update({finished: finishTime})
+            $scope.gameComplete = isAllLocated(snapshot.val())
+          }
+        });
+      };
+
+      ref.child('games').once('value', function(snapshot) {
+        $scope.allGames = snapshot.val();
+        console.log("All Games", $scope.allGames)
       })
 
-      ref.child(userLink).child('checkpoints').once('value', function(snapshot) {
-        $scope.userCheckpoints = snapshot.val();
-        console.log("get user checkpoints: ", $scope.userCheckpoints);
-
-        snapshot.forEach(function(checkpoint){
-          $scope.gameComplete = checkpoint.val().located
-        })
-
-        console.log("all located? ", $scope.gameComplete)
-
-        snapshot.forEach(function(element){
-          checkpoint = element.val();
-          if (!checkpoint.located) {
-            console.log("set next checkpoint");
-            $scope.nextCheckpoint = checkpoint;
-            console.log("next checkpoint: ", $scope.nextCheckpoint)
-            return $scope.nextCheckpoint;
+      ref.child(userLink).child('games').once('value', function(snapshot) {
+        $scope.currentGame = null;
+        $scope.nextCheckpoint = null;
+        snapshot.forEach(function(game) {
+          console.log("game val", game.val().checkpoints)
+          var checkpoints = game.val().checkpoints
+          if (!isAllLocated(checkpoints)) {
+            $scope.currentGame = game.key()
+            $scope.userCheckpoints = game.val().checkpoints
+            $scope.nextCheckpoint = findNext(checkpoints)
           };
-        })
-
+          console.log("current game: ", $scope.currentGame)
+          console.log("current CPs: ", $scope.userCheckpoints)
+          console.log("next CP: ", $scope.nextCheckpoint)
+        });
       });
 
       ref.child('users').once('value', function(snapshot) {

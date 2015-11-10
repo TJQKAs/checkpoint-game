@@ -3,8 +3,8 @@
 
     <h4>Good luck {{username}}</h4>
 
-    <div ng-show="gameComplete || !nextCheckpoint">
-      <button ng-click="startGame()" class="button button-block button-balanced">
+    <div ng-hide="currentGame">
+      <button ng-click="startGamePopup()" class="button button-block button-balanced">
         Start New Game
       </button>
     </div>
