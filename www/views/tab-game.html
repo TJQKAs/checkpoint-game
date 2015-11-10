@@ -1,4 +1,16 @@
 <ion-view>
+
+  <ion-header-bar align-title="center" >
+    <div class="buttons">
+      <button class="button" ng-show="nextCheckpoint" ng-click="quitGame()">Quit Game</button>
+    </div>
+    <h1 class="title">Game</h1>
+    <div class="buttons">
+      <button class="button" ng-show="authData" ng-click="userLogout()">Sign out</button>
+    </div>
+  </ion-header-bar>
+
+
   <ion-content class="padding">
 
     <p style="text-align: right;">Logged in as {{username}}</p>
@@ -11,27 +23,17 @@
 
     <div ng-show="nextCheckpoint"> <!-- The user is in a game -->
 
-      <div>
-        {{nextCheckpoint.clue}}
+       <div id="container">
+          {{nextCheckpoint.clue}}
       </div>
 
-    <div>
-    <br><br><br>
-    {{hotterColder}}
-    </div>
+      <div>
+        {{hotterColder}}
+      </div>
 
-    <div>
-    {{humanDistanceToTarget}} m away
-    </div>
-
-
-      <div ng-show="nextCheckpoint">
-         <button ng-click="quitGame()" class="bar-assertive">
-           Quit Game
-         </button>
-       </div>
-
-       <button ng-hide="gameCtrl.runningCheckIn || gameCtrl.gameComplete" id="check-in" ng-click="gameCtrl.checkIn()" class="bar-assertive">Update now</button>
+      <div>
+      {{humanDistanceToTarget}} m away
+      </div>
 
     </div>
 
@@ -40,6 +42,7 @@
         <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};" ng-click="checkpointPopup(checkpoint)">
           {{$index + 1}}
         </button>
+        <span ng-if = "$index<4">------</span>
       </span>
     </div>
 
@@ -47,6 +50,9 @@
       <h5>Congratulations! You've found all the checkpoints!</h5>
     </div>
 
+    <div>
+      <button ng-hide="gameCtrl.runningCheckIn || gameCtrl.gameComplete" id="check-in" ng-click="gameCtrl.checkIn()" class="bar-assertive">Update now</button>
+    </div>
 
   </ion-content>
 </ion-view>

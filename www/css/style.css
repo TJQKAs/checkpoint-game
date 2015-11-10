@@ -47,3 +47,9 @@ button.checkpoint {
   color: #447BF2;
 
 }
+
+#container {
+    width: 100%;
+    background-color: #CCC;
+    height: 200px;
+}

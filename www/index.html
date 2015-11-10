@@ -36,15 +36,6 @@
   <body ng-app="CheckpointApp" ng-controller="UserCtrl">
     <ion-pane>
 
-      <ion-header-bar align-title="left" class="bar-stable">
-        <h1 class="title">Hot, Hot, Cold</h1>
-        <div class="buttons" ng-show="authData">
-          <button ng-click="userLogout()" class="bar-assertive">
-            Sign out
-          </button>
-        </div>
-      </ion-header-bar>
-
       <div ng-hide="authData">
       <ion-nav-view name="authenticate"></ion-nav-view>
       </div>
