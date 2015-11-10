@@ -16,7 +16,10 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       ref.child(gameLink).once('value', function(snapshot) {
         var game = snapshot.val();
         ref.child(userLink).child(gameLink).update(game);
-        ref.child(userLink).child(gameLink).update({started: startTime});
+        ref.child(userLink).child(gameLink).update({
+          started: startTime,
+          finished: null
+        });
         document.location.reload();
       })
     };

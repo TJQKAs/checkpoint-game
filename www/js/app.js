@@ -125,7 +125,6 @@ ref.update(
         }
   });
 
-var ref = new Firebase("https://checkpoint-game.firebaseio.com/games/");
 ref.update(
   { "Micks House": {
       checkpoints: {
@@ -183,6 +182,68 @@ ref.update(
             mapPositionTop: 75,
             mapPositionLeft: 70,
             clue: "Blank 5"
+            }
+          }
+        }
+  });
+
+ref.update(
+  { 'All Makers': {
+      checkpoints: {
+        a: {
+            id: 'a',
+            name: "Checkpoint One",
+            realName: "Makers Academy One",
+            position: { latitude: 51.517399, longitude: -0.07346970000000001 },
+            located: false,
+            color: '#FFFFFF',
+            mapPositionTop: 21,
+            mapPositionLeft: 17,
+            clue: "The same number of days Christmas weeks' coding."
+            },
+        b: {
+            id: 'b',
+            name: "Checkpoint Two",
+            realName: "Makers Academy One",
+            position: { latitude: 51.517399, longitude: -0.07346970000000001 },
+            located: false,
+            color: '#FFFFFF',
+            mapPositionTop: 70,
+            mapPositionLeft: 33,
+            clue: "The same number of days Christmas weeks' coding."
+            },
+         c: {
+            id: 'c',
+            name: "Checkpoint Three",
+            realName: "Makers Academy One",
+            position: { latitude: 51.517399, longitude: -0.07346970000000001 },
+            located: false,
+            color: '#FFFFFF',
+            mapPositionTop: 50,
+            mapPositionLeft: 45,
+            clue: "The same number of days Christmas weeks' coding."
+            },
+          d: {
+            id: 'd',
+            name: "Checkpoint Four",
+            realName: "Makers Academy One",
+            position: { latitude: 51.517399, longitude: -0.07346970000000001 },
+            located: false,
+            color: '#FFFFFF',
+            mapPositionTop: 12,
+            mapPositionLeft: 65,
+            clue: "The same number of days Christmas weeks' coding."
+            },
+          e: {
+            id: 'e',
+            name: "Checkpoint Five",
+            realName: "Makers Academy One",
+            position: { latitude: 51.517399, longitude: -0.07346970000000001 },
+            located: false,
+            color: '#FFFFFF',
+            mapPositionTop: 75,
+            mapPositionLeft: 70,
+            clue: "The same number of days Christmas weeks' coding."
             }
           }
         }
