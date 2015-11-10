@@ -3,7 +3,7 @@
 
     <h4>Good luck {{username}}</h4>
 
-    <div ng-hide="currentGame">
+    <div ng-hide="nextCheckpoint">
       <button ng-click="startGamePopup()" class="button button-block button-balanced">
         Start New Game
       </button>
@@ -44,6 +44,12 @@
       <span style = 'background-color: #F257A5'>___</span>
       <span style = 'background-color: #F50733'>HOT</span>
       <span style = 'background-color: #26ED33'>BINGO!</span>
+    </div>
+
+    <div ng-show="nextCheckpoint">
+      <button ng-click="quitGame()" class="button button-block button-balanced">
+        Quit Game
+      </button>
     </div>
 
   </ion-content>

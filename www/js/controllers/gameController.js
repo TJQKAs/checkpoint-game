@@ -11,14 +11,23 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
     var userLink = 'users/' + $scope.authData.uid
 
     $scope.startGame = function(gameName) {
-      var gameLink = 'games/' + gameName
+      var currentGameLink = userLink + '/games/' + $scope.currentGame;
+      var gameLink = 'games/' + gameName;
       var startTime = new Date();
+
+      if ($scope.currentGame) {
+        ref.child(currentGameLink).update({
+          currentGame: false
+        });
+      }
+
       ref.child(gameLink).once('value', function(snapshot) {
         var game = snapshot.val();
         ref.child(userLink).child(gameLink).update(game);
         ref.child(userLink).child(gameLink).update({
           started: startTime,
-          finished: null
+          finished: null,
+          currentGame: true
         });
         document.location.reload();
       })
@@ -63,6 +72,16 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       checkpointData.update( dataChanges(distanceToTarget) );
     };
 
+    $scope.quitGame = function() {
+      var currentGameLink = userLink + '/games/' + $scope.currentGame;
+      if ($scope.currentGame) {
+        ref.child(currentGameLink).update({
+          currentGame: false
+        });
+        document.location.reload();
+      };
+    };
+
     var dataChanges = function(distanceToTarget) {
       console.log("changing colours")
       if (distanceToTarget > 5) {
@@ -94,7 +113,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
         var link = userLink + '/games/' + $scope.currentGame;
         ref.child(link).child('checkpoints').once('value', function(snapshot) {
           $scope.userCheckpoints = snapshot.val();
-          if (isAllLocated(snapshot.val())) {
+          if (isAllLocated(snapshot.val()) && !$scope.gameComplete) {
             finishTime = new Date();
             ref.child(link).update({finished: finishTime})
             $scope.gameComplete = isAllLocated(snapshot.val())
@@ -108,15 +127,15 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       })
 
       ref.child(userLink).child('games').once('value', function(snapshot) {
-        $scope.currentGame = null;
+        // $scope.currentGame = null;
         $scope.nextCheckpoint = null;
         snapshot.forEach(function(game) {
           console.log("game val", game.val().checkpoints)
-          var checkpoints = game.val().checkpoints
-          if (!isAllLocated(checkpoints)) {
+          var currentGame = game.val().currentGame
+          if (currentGame) {
             $scope.currentGame = game.key()
             $scope.userCheckpoints = game.val().checkpoints
-            $scope.nextCheckpoint = findNext(checkpoints)
+            $scope.nextCheckpoint = findNext(game.val().checkpoints)
           };
           console.log("current game: ", $scope.currentGame)
           console.log("current CPs: ", $scope.userCheckpoints)
@@ -125,8 +144,23 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       });
 
       ref.child('users').once('value', function(snapshot) {
-        $scope.allPlayers = snapshot.val();
-        console.log($scope.allPlayers)
+        // console.log("snap has c: ", snapshot.hasChild('20eff643-2d45-433c-9936-261b878126e4'))
+        gameLink = 'games/' + $scope.currentGame;
+
+        $scope.allPlayers = {};
+
+        snapshot.forEach(function(user) {
+          if (user.hasChild(gameLink)) {
+          userId = user.key()
+          $scope.allPlayers[userId] = {
+              checkpoints: user.child(gameLink).val().checkpoints,
+              name: user.child('name').val()
+            }
+
+          }
+        });
+
+        console.log("players", $scope.allPlayers)
       });
 
     });
