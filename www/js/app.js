@@ -179,7 +179,7 @@ ref.update(
         b: {
             id: 'b',
             name: "Checkpoint Two",
-            realName: "Makers Academy One",
+            realName: "Makers Academy Two",
             position: { latitude: 51.517399, longitude: -0.07346970000000001 },
             located: false,
             color: '#FFFFFF',
@@ -188,7 +188,7 @@ ref.update(
          c: {
             id: 'c',
             name: "Checkpoint Three",
-            realName: "Makers Academy One",
+            realName: "Makers Academy Three",
             position: { latitude: 51.517399, longitude: -0.07346970000000001 },
             located: false,
             color: '#FFFFFF',
@@ -197,7 +197,7 @@ ref.update(
           d: {
             id: 'd',
             name: "Checkpoint Four",
-            realName: "Makers Academy One",
+            realName: "Makers Academy Four",
             position: { latitude: 51.517399, longitude: -0.07346970000000001 },
             located: false,
             color: '#FFFFFF',
@@ -206,7 +206,7 @@ ref.update(
           e: {
             id: 'e',
             name: "Checkpoint Five",
-            realName: "Makers Academy One",
+            realName: "Makers Academy Five",
             position: { latitude: 51.517399, longitude: -0.07346970000000001 },
             located: false,
             color: '#FFFFFF',

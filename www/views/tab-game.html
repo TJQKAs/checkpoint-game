@@ -11,7 +11,7 @@
 
     <div>
       <span ng-repeat="checkpoint in userCheckpoints">
-        <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};">
+        <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};" ng-click="checkpointPopup(checkpoint)">
           {{$index + 1}}
         </button>
       </span>

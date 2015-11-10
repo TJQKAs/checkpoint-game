@@ -54,7 +54,9 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
       userLocation = [latitude, longitude];
-      $scope.checkInResultUpdate(userLocation)
+      if ($scope.nextCheckpoint) {
+        $scope.checkInResultUpdate(userLocation)
+      };
       $scope.$apply();
     }
 
@@ -156,9 +158,34 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
         return ({color: '#F50733'})
       }
       else {
+        locatedPopup();
         return ({color: '#26ED33', located: true})
       }
     };
+
+    var locatedPopup = function() {
+      $ionicPopup.show({
+        template: $scope.nextCheckpoint.realName,
+        title: 'Congratulations!',
+        subTitle: 'You have successfully located...',
+        buttons: [{ text: 'Close' }]
+      });
+    };
+
+    $scope.checkpointPopup = function(checkpoint) {
+      var checkpointRealName;
+      var checkpointName = checkpoint.name;
+      if (checkpoint.located) {
+        checkpointRealName = checkpoint.realName;
+      } else {
+        checkpointRealName = "You haven't found me yet!"
+      }
+      $ionicPopup.show({
+        title: checkpointName,
+        subTitle: checkpointRealName,
+        buttons: [{ text: 'Close' }]
+      });
+    }
 
     ref.on('value', function(dataSnapshot){
 
