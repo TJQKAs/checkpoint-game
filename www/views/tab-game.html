@@ -11,7 +11,7 @@
 
     <div id="map">
       <span ng-repeat="checkpoint in userCheckpoints">
-        <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};top:{{checkpoint.mapPositionTop}}%;left:{{checkpoint.mapPositionLeft}}%;position:absolute;">
+        <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};">
           {{$index + 1}}
         </button>
       </span>
