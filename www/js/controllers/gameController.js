@@ -126,6 +126,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
       ref.child('users').once('value', function(snapshot) {
         $scope.allPlayers = snapshot.val();
+        console.log($scope.allPlayers)
       });
 
     });
