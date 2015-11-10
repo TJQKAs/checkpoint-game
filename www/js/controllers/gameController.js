@@ -66,6 +66,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       var checkpointId = $scope.nextCheckpoint.id;
       var link = userLink + '/games/' + $scope.currentGame;
       var checkpointData = ref.child(link).child('checkpoints').child(checkpointId);
+      var userData =
       var targetLocation = [$scope.nextCheckpoint.position.latitude, $scope.nextCheckpoint.position.longitude];
       var distanceToTarget = GeoFire.distance(userLocation, targetLocation);
       console.log("HIYA")
