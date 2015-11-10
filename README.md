@@ -14,9 +14,9 @@ See extensive documentation on the wiki here: https://github.com/Benaud12/checkp
 
 ```
 git clone https://github.com/Benaud12/checkpoint_game
-cd checkpoint_game
+[npm update]
 bower install
 npm install
-open -a "Google Chrome" --args --allow-file-access-from-files
-open index.html
+npm install -g ionic
+ionic serve --lab
 ```
