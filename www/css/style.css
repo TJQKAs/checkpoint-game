@@ -53,3 +53,8 @@ button.checkpoint {
     background-color: #CCC;
     height: 200px;
 }
+
+#container2 {
+    width: 100%;
+    height: 50px;
+}
