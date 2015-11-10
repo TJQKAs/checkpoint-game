@@ -107,15 +107,16 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       var checkpointData = ref.child(link).child('checkpoints').child(checkpointId);
       var userData = ref.child(userLink);
       var targetLocation = [$scope.nextCheckpoint.position.latitude, $scope.nextCheckpoint.position.longitude];
-      var $scope.distanceToTarget = GeoFire.distance(userLocation, targetLocation);
+      $scope.distanceToTarget = GeoFire.distance(userLocation, targetLocation);
+      $scope.humanDistanceToTarget =  ($scope.distanceToTarget * 1000).toFixed(0);
 
       console.log("HIYA");
 
-      ref.child(userLink).once('value', function(snapshot) {
+      userData.once('value', function(snapshot) {
         if ( snapshot.val().distance < $scope.distanceToTarget ) {
-          var $scope.hotterColder = 'Getting colder...';
+          $scope.hotterColder = 'Getting colder...';
         } else {
-          var $scope.hotterColder = 'Getting warmer...';
+          $scope.hotterColder = 'Getting warmer...';
         };
 
         userData.update( {distance: $scope.distanceToTarget} );

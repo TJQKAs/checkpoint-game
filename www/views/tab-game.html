@@ -9,7 +9,7 @@
       </button>
     </div>
 
-    <div id="map">
+    <div>
       <span ng-repeat="checkpoint in userCheckpoints">
         <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};">
           {{$index + 1}}
@@ -18,7 +18,12 @@
     </div>
 
     <div>
+    <br><br><br>
     {{hotterColder}}
+    </div>
+
+    <div>
+    {{humanDistanceToTarget}} m away
     </div>
 
     <div ng-show="nextCheckpoint">
