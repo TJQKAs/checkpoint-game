@@ -1,0 +1,9 @@
+{
+  "firebase": "checkpoint-game",
+  "public": "www",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
