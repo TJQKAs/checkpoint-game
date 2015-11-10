@@ -44,6 +44,45 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       });
     }
 
+//
+
+    var watchID;
+    var geoLoc;
+
+    function checkDistance(position) {
+      console.log("checkDistance was called")
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      userLocation = [latitude, longitude];
+      $scope.checkInResultUpdate(userLocation)
+      $scope.$apply();
+    }
+
+    function errorHandler(err) {
+      if(err.code == 1) {
+         alert("Error: Access is denied!");
+      }
+
+      else if( err.code == 2) {
+         alert("Error: Position is unavailable!");
+      }
+    }
+
+    function getLocationUpdate(){
+      if(navigator.geolocation){
+        geoLoc = navigator.geolocation;
+        watchID = geoLoc.watchPosition(checkDistance, errorHandler);
+      }
+
+      else{
+         alert("Sorry, browser does not support geolocation!");
+      }
+    }
+
+    getLocationUpdate();
+
+//
+
     $scope.checkIn = function() {
       $scope.runningCheckIn = true;
       console.log("check in running? ", $scope.runningCheckIn)
