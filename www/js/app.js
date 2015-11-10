@@ -122,7 +122,7 @@ ref.update(
             position: { latitude: 51.4130411, longitude: -0.0061703 },
             located: false,
             color: '#FFFFFF',
-            clue: "Blank 1"
+            clue: "Makers Makers Makers Makers Makers Makers Makers Makers Makers Makers Makers Makers Makers Makers Makers Makers Mushrooms Makers Makers Makers Makers Makers Makers Makers Makers SNAAAKKE!!!"
             },
         b: {
             id: 'b',
