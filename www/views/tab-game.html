@@ -1,7 +1,7 @@
 <ion-view>
   <ion-content class="padding">
 
-    <h4>Good luck {{username}}</h4>
+    <p style="text-align: right;">Logged in as {{username}}</p>
 
     <div ng-hide="nextCheckpoint">
       <button ng-click="startGamePopup()" class="button button-block button-balanced">
@@ -9,13 +9,12 @@
       </button>
     </div>
 
-    <div>
-      <span ng-repeat="checkpoint in userCheckpoints">
-        <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};">
-          {{$index + 1}}
-        </button>
-      </span>
-    </div>
+
+    <div ng-show="nextCheckpoint"> <!-- The user is in a game -->
+
+      <div>
+        {{nextCheckpoint.clue}}
+      </div>
 
     <div>
     <br><br><br>
@@ -26,40 +25,29 @@
     {{humanDistanceToTarget}} m away
     </div>
 
-    <div ng-show="nextCheckpoint">
-      <div>
-        Clue: {{nextCheckpoint.clue}}
-      </div>
-      <div ng-hide="runningCheckIn || gameComplete">
-        <button ng-click="checkIn()" class="button button-block button-balanced">
-          Check In
-        </button>
-      </div>
-      <div ng-show="runningCheckIn">
-        Geolocation in progress, please wait...
-      </div>
+
+      <div ng-show="nextCheckpoint">
+         <button ng-click="quitGame()" class="bar-assertive">
+           Quit Game
+         </button>
+       </div>
+
+
+
     </div>
 
-    <div ng-show="gameComplete">
+    <div>
+      <span ng-repeat="checkpoint in userCheckpoints">
+        <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};">
+          {{$index + 1}}
+        </button>
+      </span>
+    </div>
+
+    <div ng-show="gameComplete"> <!-- The user has finished a game -->
       <h5>Congratulations! You've found all the checkpoints!</h5>
     </div>
 
-    <div id = 'legend'>
-      <span style = 'background-color: #FFFFFF; border: solid; border-width: 1px;border-color: #447BF2'>Locked</span>
-      <span style = 'background-color: #26C2ED'>COLD</span>
-      <span style = 'background-color: #447BF2'>___</span>
-      <span style = 'background-color: #A68AED'>___</span>
-      <span style = 'background-color: #F0B6D8'>___</span>
-      <span style = 'background-color: #F257A5'>___</span>
-      <span style = 'background-color: #F50733'>HOT</span>
-      <span style = 'background-color: #26ED33'>BINGO!</span>
-    </div>
-
-    <div ng-show="nextCheckpoint">
-      <button ng-click="quitGame()" class="button button-block button-balanced">
-        Quit Game
-      </button>
-    </div>
 
   </ion-content>
 </ion-view>
