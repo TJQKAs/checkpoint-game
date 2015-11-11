@@ -142,25 +142,25 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
     var dataChanges = function(distanceToTarget) {
       console.log("changing colours")
-      if (distanceToTarget > 5) {
-        return ({color: '#26C2ED'})
-      }
-      else if ( distanceToTarget > 3 ) {
+      if (distanceToTarget > 3) {
         return ({color: '#447BF2'})
       }
-      else if ( distanceToTarget > 1 ) {
-        return ({color: '#A68AED'})
+      else if ( distanceToTarget > 1.5 ) {
+        return ({color: '#8FB091'})
       }
       else if ( distanceToTarget > 0.5 ) {
-        return ({color: '#F0B6D8'})
+        return ({color: '#ECF218'})
       }
       else if ( distanceToTarget > 0.2 ) {
-        return ({color: '#F257A5'})
+        return ({color: '#FCB50F'})
       }
       else if ( distanceToTarget > 0.1 ) {
+        return ({color: '#FA8F17'})
+      }
+      else if ( distanceToTarget > 0.05 ) {
         return ({color: '#F50733'})
       }
-      else {
+      else if ( distanceToTarget <= 0.05) {
         locatedPopup();
         return ({color: '#26ED33', located: true})
       }
