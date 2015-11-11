@@ -86,6 +86,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 //
 
     $scope.checkIn = function() {
+      console.log($scope.finished);
       $scope.runningCheckIn = true;
       console.log("check in running? ", $scope.runningCheckIn)
 
@@ -101,6 +102,8 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
         console.log("check in still running? ", $scope.runningCheckIn);
       });
     };
+
+
 
     $scope.checkInResultUpdate = function(userLocation) {
       console.log("run db update now");
@@ -243,7 +246,56 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
         console.log("players", $scope.allPlayers)
       });
 
+      var link = userLink + '/games/' + $scope.currentGame;
+          ref.child(link).once('value', function(snapshot) {
+          var game = snapshot.val();
+          var startTime = Date.parse(game.started);
+          var timeNow = Date.now();
+          var timeLapsed = (timeNow - startTime);
+          var mydate = new Date(timeLapsed);
+          var humandate = mydate.getUTCHours()+ " hours, " + mydate.getUTCMinutes()+ " minutes and " + mydate.getUTCSeconds()+ " second(s)";
+          console.log(humandate);
+          console.log( mydate.getUTCHours())
+          var timeVar = document.getElementById('timer'), seconds = mydate.getUTCSeconds(), minutes = mydate.getUTCMinutes(), hours = mydate.getUTCHours(), time;
+
+          function add() {
+            seconds++;
+            if (seconds >= 60) {
+              seconds = 0;
+              minutes++;
+                if (minutes >= 60) {
+                  minutes = 0;
+                  hours++;
+                }
+          }
+            timeVar.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
+            ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
+            ":" + (seconds > 9 ? seconds : "0" + seconds);
+            timer();
+          }
+          function timer() {
+            var time = setTimeout(add, 1000);
+          }
+          timer();
+
+        });
+
+
     });
+    //
+    //   /* Clear button */
+    //   $scope.onclick = function() {
+    //       h1.textContent = "00:00:00";
+    //       seconds = 0; minutes = 0; hours = 0;
+    //   }
+
+      // /* Start button */
+      // start.onclick = timer;
+      //
+      // /* Stop button */
+      // stop.onclick = function() {
+      //     clearTimeout(t);
+      // }
 
   }
 
