@@ -50,7 +50,6 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
     var geoLoc;
 
     function checkDistance(position) {
-      console.log("checkDistance was called")
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
       userLocation = [latitude, longitude];
@@ -86,27 +85,18 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 //
 
     $scope.checkIn = function() {
-      console.log($scope.finished);
       $scope.runningCheckIn = true;
-      console.log("check in running? ", $scope.runningCheckIn)
-
       CurrentLocationFactory(function(returnVal){
         var userLocation = returnVal;
-
-        console.log("check in still running? ", $scope.runningCheckIn)
-        console.log("user located at: ", userLocation);
-
         $scope.checkInResultUpdate(userLocation)
         $scope.runningCheckIn = false;
         $scope.$apply();
-        console.log("check in still running? ", $scope.runningCheckIn);
       });
     };
 
 
 
     $scope.checkInResultUpdate = function(userLocation) {
-      console.log("run db update now");
       var checkpointId = $scope.nextCheckpoint.id;
       var link = userLink + '/games/' + $scope.currentGame;
       var checkpointData = ref.child(link).child('checkpoints').child(checkpointId);
@@ -114,8 +104,6 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       var targetLocation = [$scope.nextCheckpoint.position.latitude, $scope.nextCheckpoint.position.longitude];
       $scope.distanceToTarget = GeoFire.distance(userLocation, targetLocation);
       $scope.humanDistanceToTarget =  ($scope.distanceToTarget * 1000).toFixed(0);
-
-      console.log("HIYA");
 
       userData.once('value', function(snapshot) {
         if ( snapshot.val().distance < $scope.distanceToTarget ) {
@@ -142,7 +130,6 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
     };
 
     var dataChanges = function(distanceToTarget) {
-      console.log("changing colours")
       if (distanceToTarget > 3) {
         return ({color: '#447BF2'})
       }
@@ -207,32 +194,24 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
       ref.child('games').once('value', function(snapshot) {
         $scope.allGames = snapshot.val();
-        console.log("All Games", $scope.allGames)
       })
 
       ref.child(userLink).child('games').once('value', function(snapshot) {
         // $scope.currentGame = null;
         $scope.nextCheckpoint = null;
         snapshot.forEach(function(game) {
-          console.log("game val", game.val().checkpoints)
           var currentGame = game.val().currentGame
           if (currentGame) {
             $scope.currentGame = game.key()
             $scope.userCheckpoints = game.val().checkpoints
             $scope.nextCheckpoint = findNext(game.val().checkpoints)
           };
-          console.log("current game: ", $scope.currentGame)
-          console.log("current CPs: ", $scope.userCheckpoints)
-          console.log("next CP: ", $scope.nextCheckpoint)
         });
       });
 
       ref.child('users').once('value', function(snapshot) {
-        // console.log("snap has c: ", snapshot.hasChild('20eff643-2d45-433c-9936-261b878126e4'))
         gameLink = 'games/' + $scope.currentGame;
-
         $scope.allPlayers = {};
-
         snapshot.forEach(function(user) {
           if (user.hasChild(gameLink)) {
           userId = user.key()
@@ -240,11 +219,9 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
               checkpoints: user.child(gameLink).val().checkpoints,
               name: user.child('name').val()
             }
-
           }
         });
 
-        console.log("players", $scope.allPlayers)
       });
 
       var link = userLink + '/games/' + $scope.currentGame;
@@ -255,8 +232,6 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
           var timeLapsed = (timeNow - startTime);
           var mydate = new Date(timeLapsed);
           var humandate = mydate.getUTCHours()+ " hours, " + mydate.getUTCMinutes()+ " minutes and " + mydate.getUTCSeconds()+ " second(s)";
-          console.log(humandate);
-          console.log( mydate.getUTCHours())
           var timeVar = document.getElementById('timer'), seconds = mydate.getUTCSeconds(), minutes = mydate.getUTCMinutes(), hours = mydate.getUTCHours(), time;
 
           function add() {
@@ -281,22 +256,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
         });
 
-
     });
-    //
-    //   /* Clear button */
-    //   $scope.onclick = function() {
-    //       h1.textContent = "00:00:00";
-    //       seconds = 0; minutes = 0; hours = 0;
-    //   }
-
-      // /* Start button */
-      // start.onclick = timer;
-      //
-      // /* Stop button */
-      // stop.onclick = function() {
-      //     clearTimeout(t);
-      // }
 
   }
 

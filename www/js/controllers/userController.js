@@ -8,7 +8,6 @@ checkpointApp.controller("UserCtrl", function(DatabaseDataFactory, UserAdminFact
     var link = 'users/' + $scope.authData.uid + '/name';
     ref.child(link).once('value', function(snapshot) {
       $scope.username = snapshot.val();
-      console.log($scope.username);
     });
   }
 
