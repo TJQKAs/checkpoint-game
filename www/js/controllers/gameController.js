@@ -239,6 +239,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
           var game = snapshot.val();
           var startTime = Date.parse(game.started);
           var timeElapsedMilli = timeNow - startTime;
+          var timeNow = new Date().getTime();
           var timeElapsed = new Date(timeElapsedMilli);
           var h = timeElapsed.getHours();
           var m = timeElapsed.getMinutes();
