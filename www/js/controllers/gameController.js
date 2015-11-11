@@ -132,22 +132,22 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
     };
 
     var dataChanges = function(distanceToTarget) {
-      if (distanceToTarget > 3) {
+      if (distanceToTarget > 1) {
         return ({color: '#1459ee'})
       }
-      else if ( distanceToTarget > 1.5 ) {
+      else if ( distanceToTarget > 0.8 ) {
         return ({color: '#8caef8'})
       }
-      else if ( distanceToTarget > 0.5 ) {
+      else if ( distanceToTarget > 0.55 ) {
         return ({color: '#f6f990'})
       }
-      else if ( distanceToTarget > 0.2 ) {
+      else if ( distanceToTarget > 0.35 ) {
         return ({color: '#fcc541'})
       }
-      else if ( distanceToTarget > 0.1 ) {
+      else if ( distanceToTarget > 0.2 ) {
         return ({color: '#FA8F17'})
       }
-      else if ( distanceToTarget > 0.05 ) {
+      else if ( distanceToTarget > 0.1 ) {
         return ({color: '#F50733'})
       }
       else if ( distanceToTarget <= 0.05) {
