@@ -30,7 +30,7 @@
         </tr>
         <tr>
           <td style="text-align:center; color:{{nextCheckpoint.color}}" ng-show="humanDistanceToTarget">{{humanDistanceToTarget}} m away</td>
-          <td style="text-align:center" id="timer" style="color:{{nextCheckpoint.color}}"></td>
+          <td ng-show="humanDistanceToTarget" style="text-align:center" id="timer" style="color:{{nextCheckpoint.color}}"></td>
         </tr>
       </table>
 
