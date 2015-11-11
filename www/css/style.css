@@ -58,3 +58,10 @@ button.checkpoint {
     width: 100%;
     height: 50px;
 }
+
+
+#timer {
+  background-color: grey;
+  width: 57px;
+}
+
