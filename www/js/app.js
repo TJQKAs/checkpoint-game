@@ -113,7 +113,7 @@ ref.update(
   });
 
 ref.update(
-  { "Micks House": {
+  { "Mick's House - Testing": {
       checkpoints: {
         a: {
             id: 'a',

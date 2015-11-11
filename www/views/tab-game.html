@@ -8,7 +8,7 @@
   </div>
 
     <div ng-hide="nextCheckpoint">
-      <button ng-click="startGamePopup()" class="button button-block button-balanced">
+      <button ng-click="startGamePopup()" class="button button-block button-stable">
         Start New Game
       </button>
     </div>
@@ -25,12 +25,12 @@
 
       <table style="width:100%; table-layout: fixed;">
         <tr>
-          <td style="text-align:center">Distance</td>
-          <td style="text-align:center">Timer</td>
+          <td style="text-align:center; font-size: 160%; line-height: 140%;">Distance</td>
+          <td style="text-align:center; font-size: 160%; line-height: 140%;">Timer</td>
         </tr>
         <tr>
-          <td style="text-align:center; color:{{nextCheckpoint.color}}" ng-show="humanDistanceToTarget">{{humanDistanceToTarget}} m away</td>
-          <td ng-show="humanDistanceToTarget" style="text-align:center" id="timer" style="color:{{nextCheckpoint.color}}"></td>
+          <td style="text-align:center; font-size: 160%; line-height: 140%;" ng-show="humanDistanceToTarget">{{humanDistanceToTarget}} m away</td>
+          <td ng-show="humanDistanceToTarget" style="text-align:center; font-size: 160%; line-height: 140%;" id="timer" style="color:{{nextCheckpoint.color}}"></td>
         </tr>
       </table>
 
