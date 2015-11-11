@@ -1,7 +1,11 @@
 <ion-view>
+
   <ion-content class="padding">
 
-    <p style="text-align: right;">Logged in as {{username}}</p>
+  <div id="container2">
+    <div style=" float: left; font-size:small; display:inline">{{currentGame}}</div>
+    <div style=" float: right; font-size:small; display:inline">Logged in as {{username}}</div>
+  </div>
 
     <div ng-hide="nextCheckpoint">
       <button ng-click="startGamePopup()" class="button button-block button-balanced">
@@ -11,35 +15,33 @@
 
     <div ng-show="nextCheckpoint"> <!-- The user is in a game -->
 
-      <div>
-        {{nextCheckpoint.clue}}
+       <div id="container" style = "margin:30px; background-color:{{nextCheckpoint.color}}">
+          <p style = "font-size: 200%; line-height: 150%; margin:10px; color:white">{{nextCheckpoint.clue}}</p>
       </div>
 
-    <div>
-    <br><br><br>
-    {{hotterColder}}
-    </div>
+      <div style = "text-align:center; margin:20px">
+        {{hotterColder}}
+      </div>
 
-    <div>
-    {{humanDistanceToTarget}} m away
-    </div>
-
-
-      <div ng-show="nextCheckpoint">
-         <button ng-click="quitGame()" class="bar-assertive">
-           Quit Game
-         </button>
-       </div>
-
-       <button ng-hide="gameCtrl.runningCheckIn || gameCtrl.gameComplete" id="check-in" ng-click="gameCtrl.checkIn()" class="bar-assertive">Update now</button>
+      <table style="width:100%; table-layout: fixed;">
+        <tr>
+          <td style="text-align:center">Distance</td>
+          <td style="text-align:center">Timer</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; color:{{nextCheckpoint.color}}" ng-show="humanDistanceToTarget">{{humanDistanceToTarget}} m away</td>
+          <td ng-show="humanDistanceToTarget" style="text-align:center" id="timer" style="color:{{nextCheckpoint.color}}"></td>
+        </tr>
+      </table>
 
     </div>
 
-    <div>
+    <div style = "margin:20px;">
       <span ng-repeat="checkpoint in userCheckpoints">
         <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};" ng-click="checkpointPopup(checkpoint)">
           {{$index + 1}}
         </button>
+        <span ng-if = "$index<4">------</span>
       </span>
     </div>
 
@@ -48,7 +50,7 @@
     </div>
 
 
-    <div id="timer" style="color:{{nextCheckpoint.color}};"></div>
+
 
   </ion-content>
 </ion-view>
