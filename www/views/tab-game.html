@@ -30,7 +30,7 @@
         </tr>
         <tr>
           <td style="text-align:center; color:{{nextCheckpoint.color}}" ng-show="humanDistanceToTarget">{{humanDistanceToTarget}} m away</td>
-          <td style="text-align:center">Timer</td>
+          <td style="text-align:center" id="timer" style="color:{{nextCheckpoint.color}}"></td>
         </tr>
       </table>
 
@@ -53,7 +53,7 @@
       <button ng-hide="gameCtrl.runningCheckIn || gameCtrl.gameComplete" id="check-in" ng-click="gameCtrl.checkIn()" class="bar-assertive" style = "margin:20px">Update now</button>
     </div>
 
-    <div id="timer" style="color:{{nextCheckpoint.color}};"></div>
+
 
   </ion-content>
 </ion-view>
