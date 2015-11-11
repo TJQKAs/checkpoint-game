@@ -250,7 +250,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
             timer();
           }
           function timer() {
-            var time = setTimeout(add, 1000);
+            var time = setTimeout(add, (1000 - (Date.now() % 1000)));;
           }
           timer();
 
