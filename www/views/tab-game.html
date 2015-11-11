@@ -15,12 +15,12 @@
 
     <div ng-show="nextCheckpoint"> <!-- The user is in a game -->
 
-       <div id="container" style = "margin:30px; background-color:{{nextCheckpoint.color}}">
-          <p style = "font-size: 200%; line-height: 150%; margin:10px; color:white">{{nextCheckpoint.clue}}</p>
+       <div id="container" style = "margin:30px; border: thin solid #adadad; border-radius:3px; background-color:#FBFBFB; text-align:center;">
+          <p style = "font-size: 160%; line-height: 140%; margin:10px;">{{nextCheckpoint.clue}}</p>
       </div>
 
-      <div style = "text-align:center; margin:20px">
-        {{hotterColder}}
+      <div style = "margin:30px; border: thin solid #adadad; border-radius:3px; background-color:{{nextCheckpoint.color}}; text-align:center;">
+          <p style = "font-size: 160%; line-height: 140%; margin:10px;">{{hotterColder}}</p>
       </div>
 
       <table style="width:100%; table-layout: fixed;">

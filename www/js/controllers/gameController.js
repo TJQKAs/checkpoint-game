@@ -6,6 +6,8 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
   syncObject.$bindTo($scope, 'data');
 
+  $scope.hotterColder = "Awaiting geolocation..."
+
   if ($scope.authData) {
 
     var userLink = 'users/' + $scope.authData.uid
@@ -131,16 +133,16 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
     var dataChanges = function(distanceToTarget) {
       if (distanceToTarget > 3) {
-        return ({color: '#447BF2'})
+        return ({color: '#1459ee'})
       }
       else if ( distanceToTarget > 1.5 ) {
-        return ({color: '#8FB091'})
+        return ({color: '#8caef8'})
       }
       else if ( distanceToTarget > 0.5 ) {
-        return ({color: '#ECF218'})
+        return ({color: '#f6f990'})
       }
       else if ( distanceToTarget > 0.2 ) {
-        return ({color: '#FCB50F'})
+        return ({color: '#fcc541'})
       }
       else if ( distanceToTarget > 0.1 ) {
         return ({color: '#FA8F17'})
@@ -150,7 +152,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       }
       else if ( distanceToTarget <= 0.05) {
         locatedPopup();
-        return ({color: '#26ED33', located: true})
+        return ({color: '#aa0527', located: true})
       }
     };
 
