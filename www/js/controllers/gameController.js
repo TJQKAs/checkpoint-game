@@ -125,7 +125,6 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
         };
 
         userData.update( {distance: $scope.distanceToTarget} );
-
       });
 
       checkpointData.update( dataChanges($scope.distanceToTarget) );
@@ -143,25 +142,25 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
     var dataChanges = function(distanceToTarget) {
       console.log("changing colours")
-      if (distanceToTarget > 3) {
+      if (distanceToTarget > 5) {
+        return ({color: '#26C2ED'})
+      }
+      else if ( distanceToTarget > 3 ) {
         return ({color: '#447BF2'})
       }
-      else if ( distanceToTarget > 1.5 ) {
-        return ({color: '#8FB091'})
+      else if ( distanceToTarget > 1 ) {
+        return ({color: '#A68AED'})
       }
       else if ( distanceToTarget > 0.5 ) {
-        return ({color: '#ECF218'})
+        return ({color: '#F0B6D8'})
       }
       else if ( distanceToTarget > 0.2 ) {
-        return ({color: '#FCB50F'})
+        return ({color: '#F257A5'})
       }
       else if ( distanceToTarget > 0.1 ) {
-        return ({color: '#FA8F17'})
-      }
-      else if ( distanceToTarget > 0.05 ) {
         return ({color: '#F50733'})
       }
-      else if ( distanceToTarget <= 0.05) {
+      else {
         locatedPopup();
         return ({color: '#26ED33', located: true})
       }
@@ -247,57 +246,43 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
         console.log("players", $scope.allPlayers)
       });
 
-      var link = userLink + '/games/' + $scope.currentGame;
-          ref.child(link).once('value', function(snapshot) {
+
+        function startTime() {
+
+        function checkTime(i) {
+          if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+          return i;
+        }
+
+        var link = userLink + '/games/' + $scope.currentGame;
+
+        ref.child(link).once('value', function(snapshot) {
+
           var game = snapshot.val();
           var startTime = Date.parse(game.started);
-          var timeNow = Date.now();
-          var timeLapsed = (timeNow - startTime);
-          var mydate = new Date(timeLapsed);
-          var humandate = mydate.getUTCHours()+ " hours, " + mydate.getUTCMinutes()+ " minutes and " + mydate.getUTCSeconds()+ " second(s)";
-          console.log(humandate);
-          console.log( mydate.getUTCHours())
-          var timeVar = document.getElementById('timer'), seconds = mydate.getUTCSeconds(), minutes = mydate.getUTCMinutes(), hours = mydate.getUTCHours(), time;
+          var timeNow = new Date().getTime();
 
-          function add() {
-            seconds++;
-            if (seconds >= 60) {
-              seconds = 0;
-              minutes++;
-                if (minutes >= 60) {
-                  minutes = 0;
-                  hours++;
-                }
-          }
-            timeVar.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
-            ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
-            ":" + (seconds > 9 ? seconds : "0" + seconds);
-            timer();
-          }
-          function timer() {
-            var time = setTimeout(add, (1000 - (Date.now() % 1000)));;
-          }
-          timer();
+          var timeElapsedMilli = timeNow - startTime;
 
+          var timeElapsed = new Date(timeElapsedMilli);
+
+          var h = timeElapsed.getHours();
+          var m = timeElapsed.getMinutes();
+          var s = timeElapsed.getSeconds();
+          m = checkTime(m);
+          s = checkTime(s);
+          document.getElementById('timer').innerHTML =
+          h + ":" + m + ":" + s;
         });
 
+      };
+      function newTimer() {
+          setInterval(startTime, 500);
+      };
 
+      newTimer();
 
     });
-    //
-    //   /* Clear button */
-    //   $scope.onclick = function() {
-    //       h1.textContent = "00:00:00";
-    //       seconds = 0; minutes = 0; hours = 0;
-    //   }
-
-      // /* Start button */
-      // start.onclick = timer;
-      //
-      // /* Stop button */
-      // stop.onclick = function() {
-      //     clearTimeout(t);
-      // }
 
   }
 
