@@ -3,7 +3,7 @@
   <ion-content class="padding">
 
   <div id="container2">
-    <div style=" float: left; font-size:small; display:inline">{{currentGame}}</div>
+    <div style=" float: left; font-size:small; display:inline">Playing game {{currentGame}}</div>
     <div style=" float: right; font-size:small; display:inline">Logged in as {{username}}</div>
   </div>
 
@@ -11,6 +11,11 @@
       <button ng-click="startGamePopup()" class="button button-block button-stable">
         Start New Game
       </button>
+
+      <div style="margin:50px; text-align:center;">
+        <img src="img/hothotcold.png" width="70%">
+      </div>
+
     </div>
 
     <div ng-show="nextCheckpoint"> <!-- The user is in a game -->
@@ -36,6 +41,10 @@
 
     </div>
 
+    <div ng-show="gameComplete" style="text-align:center; font-size: 160%; line-height: 140%;"> <!-- The user has finished a game -->
+      Congratulations! You've found all the checkpoints!
+    </div>
+
     <div style = "margin:20px;">
       <span ng-repeat="checkpoint in userCheckpoints">
         <button class="checkpoint" id="checkpoint-{{checkpoint.id}}" style="background-color:{{checkpoint.color}};" ng-click="checkpointPopup(checkpoint)">
@@ -45,9 +54,6 @@
       </span>
     </div>
 
-    <div ng-show="gameComplete"> <!-- The user has finished a game -->
-      <h5>Congratulations! You've found all the checkpoints!</h5>
-    </div>
 
 
 

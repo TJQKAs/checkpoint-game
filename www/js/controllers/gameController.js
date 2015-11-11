@@ -159,8 +159,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
     var locatedPopup = function() {
       $ionicPopup.show({
         template: $scope.nextCheckpoint.realName,
-        title: 'Congratulations!',
-        subTitle: 'You have successfully located...',
+        title: 'Congratulations! You have successfully located this checkpoint:',
         buttons: [{ text: 'Close' }]
       });
     };
