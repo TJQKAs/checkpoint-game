@@ -47,3 +47,8 @@ button.checkpoint {
   color: #447BF2;
 
 }
+
+#timer {
+  background-color: grey;
+  width: 57px;
+}
