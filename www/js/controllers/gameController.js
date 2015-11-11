@@ -6,6 +6,8 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
   syncObject.$bindTo($scope, 'data');
 
+  $scope.hotterColder = "Awaiting geolocation..."
+
   if ($scope.authData) {
 
     var userLink = 'users/' + $scope.authData.uid
@@ -50,7 +52,6 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
     var geoLoc;
 
     function checkDistance(position) {
-      console.log("checkDistance was called")
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
       userLocation = [latitude, longitude];
@@ -86,27 +87,18 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 //
 
     $scope.checkIn = function() {
-      console.log($scope.finished);
       $scope.runningCheckIn = true;
-      console.log("check in running? ", $scope.runningCheckIn)
-
       CurrentLocationFactory(function(returnVal){
         var userLocation = returnVal;
-
-        console.log("check in still running? ", $scope.runningCheckIn)
-        console.log("user located at: ", userLocation);
-
         $scope.checkInResultUpdate(userLocation)
         $scope.runningCheckIn = false;
         $scope.$apply();
-        console.log("check in still running? ", $scope.runningCheckIn);
       });
     };
 
 
 
     $scope.checkInResultUpdate = function(userLocation) {
-      console.log("run db update now");
       var checkpointId = $scope.nextCheckpoint.id;
       var link = userLink + '/games/' + $scope.currentGame;
       var checkpointData = ref.child(link).child('checkpoints').child(checkpointId);
@@ -114,8 +106,6 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       var targetLocation = [$scope.nextCheckpoint.position.latitude, $scope.nextCheckpoint.position.longitude];
       $scope.distanceToTarget = GeoFire.distance(userLocation, targetLocation);
       $scope.humanDistanceToTarget =  ($scope.distanceToTarget * 1000).toFixed(0);
-
-      console.log("HIYA");
 
       userData.once('value', function(snapshot) {
         if ( snapshot.val().distance < $scope.distanceToTarget ) {
@@ -141,36 +131,34 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
     };
 
     var dataChanges = function(distanceToTarget) {
-      console.log("changing colours")
-      if (distanceToTarget > 5) {
-        return ({color: '#26C2ED'})
+      if (distanceToTarget > 1) {
+        return ({color: '#1459ee'})
       }
-      else if ( distanceToTarget > 3 ) {
-        return ({color: '#447BF2'})
+      else if ( distanceToTarget > 0.8 ) {
+        return ({color: '#8caef8'})
       }
-      else if ( distanceToTarget > 1 ) {
-        return ({color: '#A68AED'})
+      else if ( distanceToTarget > 0.55 ) {
+        return ({color: '#f6f990'})
       }
-      else if ( distanceToTarget > 0.5 ) {
-        return ({color: '#F0B6D8'})
+      else if ( distanceToTarget > 0.35 ) {
+        return ({color: '#fcc541'})
       }
       else if ( distanceToTarget > 0.2 ) {
-        return ({color: '#F257A5'})
+        return ({color: '#FA8F17'})
       }
       else if ( distanceToTarget > 0.1 ) {
         return ({color: '#F50733'})
       }
       else {
         locatedPopup();
-        return ({color: '#26ED33', located: true})
+        return ({color: '#aa0527', located: true})
       }
     };
 
     var locatedPopup = function() {
       $ionicPopup.show({
         template: $scope.nextCheckpoint.realName,
-        title: 'Congratulations!',
-        subTitle: 'You have successfully located...',
+        title: 'Congratulations! You have successfully located this checkpoint:',
         buttons: [{ text: 'Close' }]
       });
     };
@@ -206,32 +194,24 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
       ref.child('games').once('value', function(snapshot) {
         $scope.allGames = snapshot.val();
-        console.log("All Games", $scope.allGames)
       })
 
       ref.child(userLink).child('games').once('value', function(snapshot) {
         // $scope.currentGame = null;
         $scope.nextCheckpoint = null;
         snapshot.forEach(function(game) {
-          console.log("game val", game.val().checkpoints)
           var currentGame = game.val().currentGame
           if (currentGame) {
             $scope.currentGame = game.key()
             $scope.userCheckpoints = game.val().checkpoints
             $scope.nextCheckpoint = findNext(game.val().checkpoints)
           };
-          console.log("current game: ", $scope.currentGame)
-          console.log("current CPs: ", $scope.userCheckpoints)
-          console.log("next CP: ", $scope.nextCheckpoint)
         });
       });
 
       ref.child('users').once('value', function(snapshot) {
-        // console.log("snap has c: ", snapshot.hasChild('20eff643-2d45-433c-9936-261b878126e4'))
         gameLink = 'games/' + $scope.currentGame;
-
         $scope.allPlayers = {};
-
         snapshot.forEach(function(user) {
           if (user.hasChild(gameLink)) {
           userId = user.key()
@@ -239,11 +219,9 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
               checkpoints: user.child(gameLink).val().checkpoints,
               name: user.child('name').val()
             }
-
           }
         });
 
-        console.log("players", $scope.allPlayers)
       });
 
 
@@ -260,12 +238,8 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
 
           var game = snapshot.val();
           var startTime = Date.parse(game.started);
-          var timeNow = new Date().getTime();
-
           var timeElapsedMilli = timeNow - startTime;
-
           var timeElapsed = new Date(timeElapsedMilli);
-
           var h = timeElapsed.getHours();
           var m = timeElapsed.getMinutes();
           var s = timeElapsed.getSeconds();

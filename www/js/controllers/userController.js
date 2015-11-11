@@ -8,15 +8,13 @@ checkpointApp.controller("UserCtrl", function(DatabaseDataFactory, UserAdminFact
     var link = 'users/' + $scope.authData.uid + '/name';
     ref.child(link).once('value', function(snapshot) {
       $scope.username = snapshot.val();
-      console.log($scope.username);
     });
   }
 
   $scope.signupPopUp = function() {
     $ionicPopup.show({
       templateUrl: 'views/authenticate-signup.html',
-      title: 'Give us ya deets!',
-      subTitle: '...please',
+      title: 'Please enter your details',
       scope: $scope,
       buttons: [
         { text: 'Cancel' }
@@ -27,8 +25,7 @@ checkpointApp.controller("UserCtrl", function(DatabaseDataFactory, UserAdminFact
   $scope.loginPopUp = function() {
     $ionicPopup.show({
       templateUrl: 'views/authenticate-login.html',
-      title: 'Give us ya deets!',
-      subTitle: '...please',
+      title: 'Please enter your details',
       scope: $scope,
       buttons: [
         { text: 'Cancel' }

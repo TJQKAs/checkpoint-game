@@ -3,37 +3,46 @@
   <ion-content class="padding">
 
   <div id="container2">
-    <div style=" float: left; font-size:small; display:inline">{{currentGame}}</div>
+    <div ng-show="nextCheckpoint" style=" float: left; font-size:small; display:inline">Playing game {{currentGame}}</div>
     <div style=" float: right; font-size:small; display:inline">Logged in as {{username}}</div>
   </div>
 
     <div ng-hide="nextCheckpoint">
-      <button ng-click="startGamePopup()" class="button button-block button-balanced">
+      <button ng-click="startGamePopup()" class="button button-block button-stable">
         Start New Game
       </button>
+
+      <div style="margin:50px; text-align:center;">
+        <img src="img/hothotcold.png" width="70%">
+      </div>
+
     </div>
 
     <div ng-show="nextCheckpoint"> <!-- The user is in a game -->
 
-       <div id="container" style = "margin:30px; background-color:{{nextCheckpoint.color}}">
-          <p style = "font-size: 200%; line-height: 150%; margin:10px; color:white">{{nextCheckpoint.clue}}</p>
+       <div id="container" style = "margin:30px; border: thin solid #adadad; border-radius:3px; background-color:#FBFBFB; text-align:center;">
+          <p style = "font-size: 160%; line-height: 140%; margin:10px;">{{nextCheckpoint.clue}}</p>
       </div>
 
-      <div style = "text-align:center; margin:20px">
-        {{hotterColder}}
+      <div style = "margin:30px; border: thin solid #adadad; border-radius:3px; background-color:{{nextCheckpoint.color}}; text-align:center;">
+          <p style = "font-size: 160%; line-height: 140%; margin:10px;">{{hotterColder}}</p>
       </div>
 
       <table style="width:100%; table-layout: fixed;">
         <tr>
-          <td style="text-align:center">Distance</td>
-          <td style="text-align:center">Timer</td>
+          <td style="text-align:center; font-size: 160%; line-height: 140%;">Distance</td>
+          <td style="text-align:center; font-size: 160%; line-height: 140%;">Timer</td>
         </tr>
         <tr>
-          <td style="text-align:center; color:{{nextCheckpoint.color}}" ng-show="humanDistanceToTarget">{{humanDistanceToTarget}} m away</td>
-          <td ng-show="humanDistanceToTarget" style="text-align:center" id="timer" style="color:{{nextCheckpoint.color}}"></td>
+          <td style="text-align:center; font-size: 160%; line-height: 140%;" ng-show="humanDistanceToTarget">{{humanDistanceToTarget}} m away</td>
+          <td ng-show="humanDistanceToTarget" style="text-align:center; font-size: 160%; line-height: 140%;" id="timer" style="color:{{nextCheckpoint.color}}"></td>
         </tr>
       </table>
 
+    </div>
+
+    <div ng-show="gameComplete" style="text-align:center; font-size: 160%; line-height: 140%;"> <!-- The user has finished a game -->
+      Congratulations! You've found all the checkpoints!
     </div>
 
     <div style = "margin:20px;">
@@ -45,9 +54,6 @@
       </span>
     </div>
 
-    <div ng-show="gameComplete"> <!-- The user has finished a game -->
-      <h5>Congratulations! You've found all the checkpoints!</h5>
-    </div>
 
 
 

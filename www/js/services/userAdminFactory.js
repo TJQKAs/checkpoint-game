@@ -20,7 +20,6 @@ checkpointApp.factory('UserAdminFactory', function() {
       if (error) {
         alert(error);
       } else {
-        console.log("Authenticated successfully with payload: ", authData);
         document.location.reload();
       }
     });

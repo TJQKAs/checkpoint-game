@@ -16,10 +16,6 @@ var findNext = function(checkpoints) {
 
 var updatePlayerCheckpoints = function(playerData, currentGame) {
   angular.forEach(playerData, function(value, key){
-    // if (!value.located) { this.push(value) };
     key['currentCheckpoints'] = value.game.currentGame.checkpoints;
-    console.log("key: ", key, "value: ", value)
-    console.log(key['currentCheckpoints']);
   });
-  // return array.shift();
 };
