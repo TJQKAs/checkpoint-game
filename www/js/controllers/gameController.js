@@ -118,6 +118,9 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       console.log("HIYA");
 
       userData.once('value', function(snapshot) {
+        if (!$scope.hotterColder) {
+          $scope.hotterColder = 'Awaiting Geolocation...';
+        };
         if (Math.abs(snapshot.val().distance - $scope.distanceToTarget) > 0.005) {
           if ( snapshot.val().distance < $scope.distanceToTarget ) {
             $scope.hotterColder = 'Getting colder...';
@@ -126,9 +129,7 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
           };
 
           userData.update( {distance: $scope.distanceToTarget} );
-        } else {
-          $scope.hotterColder = 'Getting warmer...';
-        };
+        }
       });
 
       checkpointData.update( dataChanges($scope.distanceToTarget) );
