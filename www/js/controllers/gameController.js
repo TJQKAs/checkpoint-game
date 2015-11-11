@@ -225,37 +225,40 @@ checkpointApp.controller('GameCtrl', function(DatabaseDataFactory, CurrentLocati
       });
 
 
-        function startTime() {
+      function startTime() {
 
-        function checkTime(i) {
-          if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-          return i;
-        }
+              function checkTime(i) {
+                if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+                return i;
+              }
 
-        var link = userLink + '/games/' + $scope.currentGame;
+              var link = userLink + '/games/' + $scope.currentGame;
 
-        ref.child(link).once('value', function(snapshot) {
+              ref.child(link).once('value', function(snapshot) {
 
-          var game = snapshot.val();
-          var startTime = Date.parse(game.started);
-          var timeElapsedMilli = timeNow - startTime;
-          var timeNow = new Date().getTime();
-          var timeElapsed = new Date(timeElapsedMilli);
-          var h = timeElapsed.getHours();
-          var m = timeElapsed.getMinutes();
-          var s = timeElapsed.getSeconds();
-          m = checkTime(m);
-          s = checkTime(s);
-          document.getElementById('timer').innerHTML =
-          h + ":" + m + ":" + s;
-        });
+                var game = snapshot.val();
+                var startTime = Date.parse(game.started);
+                var timeNow = new Date().getTime();
 
-      };
-      function newTimer() {
-          setInterval(startTime, 500);
-      };
+                var timeElapsedMilli = timeNow - startTime;
 
-      newTimer();
+                var timeElapsed = new Date(timeElapsedMilli);
+
+                var h = timeElapsed.getHours();
+                var m = timeElapsed.getMinutes();
+                var s = timeElapsed.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById('txt').innerHTML =
+                h + ":" + m + ":" + s;
+              });
+
+            };
+            function newTimer() {
+                setInterval(startTime, 500);
+            };
+
+            newTimer();
 
     });
 
