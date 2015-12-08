@@ -57,6 +57,3 @@ ionic serve --lab
 - AngularFire
 - GeoFire
 - Ionic
-
-
-## Documentation
