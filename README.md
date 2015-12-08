@@ -7,7 +7,7 @@ Hot, Hot, Cold
 
 ## Description
 
-Hot, Hot, Cold is a mobile geolocation game where the user is required to locate checkpoints from cules given and prompts as to whether they are getting 'hotter' or 'colder' based on their current location and the direction they are moving.
+Hot, Hot, Cold is a mobile geolocation game where the user is required to locate checkpoints from cues given and prompts as to whether they are getting 'hotter' or 'colder' based on their current location and the direction they are moving.
 
 Other players' progress can also be monitored in real-time.
 
